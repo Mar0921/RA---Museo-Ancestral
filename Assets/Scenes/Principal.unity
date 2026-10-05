@@ -1305,10 +1305,6 @@ MonoBehaviour:
   catPrefab: {fileID: 959071921434398315, guid: 87fe4a9fd5d1f4247844444fbb985585, type: 3}
   mapPrefabs:
   - {fileID: 7840946712966712966, guid: edc520497362d1045a5421c79e6dc638, type: 3}
-  - {fileID: 5177641850945520781, guid: 439c43a3f24681142be26836d487d35a, type: 3}
-  - {fileID: 5939231000625232301, guid: d8c75e2b27145e54981eb9d5b5e81c2a, type: 3}
-  - {fileID: 6296596000607988957, guid: 20ed5943bd2629a42af7b30ad5ba3bd7, type: 3}
-  - {fileID: 1730924462212366504, guid: 77129bec77d9ccc4690459da333d241f, type: 3}
   panelExhibicion: {fileID: 1157624916}
   textoTituloObjeto: {fileID: 460336704}
   botonSalirExhibicion: {fileID: 1879575498}
@@ -3180,8 +3176,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 265, y: -51}
-  m_SizeDelta: {x: 390, y: 102}
+  m_AnchoredPosition: {x: 295, y: -51}
+  m_SizeDelta: {x: 450, y: 102}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &975718697
 MonoBehaviour:
