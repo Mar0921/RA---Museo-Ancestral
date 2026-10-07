@@ -88,13 +88,7 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
-    'mixamorig:LeftHandThumb2'\n\tTransform 'mixamorig:LeftHandIndex1'\n\tTransform
-    'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftHandThumb3'\n\tTransform 'mixamorig:RightArm'\n\tTransform
-    'mixamorig:LeftLeg'\n\tTransform 'mixamorig:LeftShoulder'\n\tTransform 'mixamorig:RightHandIndex3'\n\tand
-    more ...\n\tFrom animation clip 'mixamo.com'"
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that are already bound by a Humanoid avatar. These transforms can only be changed by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform 'mixamorig:LeftHandThumb2'\n\tTransform 'mixamorig:LeftHandIndex1'\n\tTransform 'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftHandThumb3'\n\tTransform 'mixamorig:RightArm'\n\tTransform 'mixamorig:LeftLeg'\n\tTransform 'mixamorig:LeftShoulder'\n\tTransform 'mixamorig:RightHandIndex3'\n\tand more ...\n\tFrom animation clip 'mixamo.com'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -211,7 +205,8 @@ MonoBehaviour:
   moveSpeed: 1.2
   rotateSpeed: 10
   stoppingDistance: 0.8
-  audioBienvenida: {fileID: 8300000, guid: e08f254f1f29c6643bfa2e3fc16f30d0, type: 3}
-  textoBienvenida: "Holaa, soy Zylo, el dia de hoy ser\xE9 tu guia, y estaremos inmersos
-    en la historia de nuestra universidad Aut\xF3noma de Occidente"
+  audioBienvenida: {fileID: 8300000, guid: 3f767533b7bff88479743a4bff1af762, type: 3}
+  textoBienvenida: "Hola, soy tu Esp\xEDritu Gu\xEDa.\n\r\nTe acompa\xF1ar\xE9 en este recorrido por las historias y leyendas que viven en nuestros territorios.  Aqu\xED encontrar\xE1s relatos, personajes y lugares que guardan parte de nuestra memoria.\n\r\nEscucha con atenci\xF3n, observa lo que encuentres. Y recuerda: en este viaje, el respeto por el territorio es lo primero.\n\r\nCuando est\xE9s listo, comencemos."
   animatorController: {fileID: 9100000, guid: 8cf7efea61211a440b1dca64c2b95784, type: 2}
+  animacionBienvenida: isWaving
+  duracionAnimacionBienvenida: 2

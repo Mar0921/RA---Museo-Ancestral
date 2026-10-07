@@ -1,21 +1,35 @@
 ﻿using UnityEngine;
 using System.Collections;
+using TMPro;
 
 [DisallowMultipleComponent]
 public class PinMapa : MonoBehaviour
 {
+    // ============================================================
+    // OBJETOS AR
+    // ============================================================
+
     [Header("Objetos a mostrar/ocultar al tocar el pin")]
     [SerializeField] private GameObject[] objetosAR;
+
+    // ============================================================
+    // LETRERO
+    // ============================================================
 
     [Header("Letrero del pin")]
     [SerializeField] private GameObject letrero;
 
     public bool FueActivado { get; private set; } = false;
 
-    public string idPin; // Ej: "2000_2002"
+    public string idPin;
+
+    // ============================================================
+    // ORDEN
+    // ============================================================
 
     [Header("Orden de aparición")]
     [SerializeField] private int ordenPin = 0;
+
     public int OrdenPin => ordenPin;
 
     // ============================================================
@@ -35,8 +49,20 @@ public class PinMapa : MonoBehaviour
     [SerializeField] private AudioClip audioRespuesta2;
 
     // ============================================================
-    // TEXTO
+    // TEXTO DE INTRODUCCIÓN
     // ============================================================
+
+    [Header("Texto de introducción")]
+
+    [Tooltip("Este texto aparecerá en RespuestaZylo antes de mostrar los modelos.")]
+    [TextArea(3, 8)]
+    [SerializeField] private string textoIntroduccion;
+
+    // ============================================================
+    // TEXTO DEL PIN
+    // ============================================================
+
+    [Header("Texto del Pin")]
 
     [TextArea]
     [SerializeField] private string textoDelPin;
@@ -49,7 +75,7 @@ public class PinMapa : MonoBehaviour
     [SerializeField] private PanelPreguntasZylo panelPreguntasZylo;
 
     // ============================================================
-    // PROPIEDADES PÚBLICAS
+    // PROPIEDADES
     // ============================================================
 
     public AudioClip IntroduccionPin => introduccionPin;
@@ -62,6 +88,8 @@ public class PinMapa : MonoBehaviour
 
     public string TextoDelPin => textoDelPin;
 
+    public string TextoIntroduccion => textoIntroduccion;
+
     // ============================================================
     // AUDIO SOURCE
     // ============================================================
@@ -69,21 +97,27 @@ public class PinMapa : MonoBehaviour
     private AudioSource audioSource;
 
     // ============================================================
+    // REFERENCIAS A ELEMENTOS DE LA ESCENA
+    // ============================================================
+
+    private GameObject respuestaZylo;
+    private TMP_Text textoRespuesta;
+
+    // ============================================================
     // AWAKE
     // ============================================================
 
     void Awake()
     {
-        // Crear AudioSource
         audioSource = gameObject.AddComponent<AudioSource>();
 
         audioSource.playOnAwake = false;
         audioSource.spatialBlend = 0f;
 
-        // Ocultar objetos AR al inicio
+        // Los modelos comienzan ocultos
         OcultarObjetos();
 
-        // Ocultar letrero al inicio
+        // Letrero oculto
         if (letrero != null)
         {
             letrero.SetActive(false);
@@ -117,6 +151,8 @@ public class PinMapa : MonoBehaviour
         {
             audioSource.Stop();
         }
+
+        OcultarRespuestaZylo();
     }
 
     // ============================================================
@@ -125,7 +161,6 @@ public class PinMapa : MonoBehaviour
 
     public void OnZyloLlego(CatController gato)
     {
-        // Evitar activar nuevamente mientras ya fue activado
         if (FueActivado)
         {
             return;
@@ -133,13 +168,14 @@ public class PinMapa : MonoBehaviour
 
         FueActivado = true;
 
-        Debug.Log($"[PinMapa] Zylo llegó al pin {idPin}");
+        Debug.Log(
+            $"[PinMapa] 🐱 Zylo llegó al pin {idPin}"
+        );
 
-        // MUY IMPORTANTE:
-        // Los objetos permanecen ocultos mientras suena
-        // la introducción.
+        // Los modelos NO deben aparecer todavía
         OcultarObjetos();
 
+        // Comenzar introducción
         StartCoroutine(SecuenciaIntroduccion(gato));
     }
 
@@ -149,47 +185,197 @@ public class PinMapa : MonoBehaviour
 
     private IEnumerator SecuenciaIntroduccion(CatController gato)
     {
-        Debug.Log($"[PinMapa] 🔊 Reproduciendo introducción del pin {idPin}");
+        Debug.Log(
+            $"[PinMapa] 🎬 Iniciando introducción de {idPin}"
+        );
 
-        // --------------------------------------------------------
-        // 1. REPRODUCIR INTRODUCCIÓN
-        // --------------------------------------------------------
+        // ========================================================
+        // 1. BUSCAR EL OBJETO DE LA ESCENA
+        // ========================================================
+
+        BuscarRespuestaZylo();
+
+        // ========================================================
+        // 2. MOSTRAR TEXTO DE INTRODUCCIÓN
+        // ========================================================
+
+        MostrarIntroduccion();
+
+        // Esperamos un frame para que Unity actualice
+        // el Canvas antes de reproducir el audio.
+        yield return null;
+
+        // ========================================================
+        // 3. REPRODUCIR AUDIO
+        // ========================================================
 
         if (introduccionPin != null)
         {
+            Debug.Log(
+                $"[PinMapa] 🔊 Reproduciendo: {introduccionPin.name}"
+            );
+
             audioSource.clip = introduccionPin;
             audioSource.Play();
 
-            // Esperar exactamente hasta que termine
-            yield return new WaitWhile(() => audioSource.isPlaying);
+            // El texto permanece visible
+            // y los modelos permanecen ocultos.
+            yield return new WaitWhile(
+                () => audioSource.isPlaying
+            );
         }
         else
         {
             Debug.LogWarning(
-                $"[PinMapa] ⚠️ El pin {idPin} no tiene Introducción Pin asignada."
+                $"[PinMapa] ⚠️ El pin {idPin} no tiene IntroduccionPin."
             );
+
+            yield return new WaitForSeconds(0.1f);
         }
 
-        // --------------------------------------------------------
-        // 2. TERMINÓ LA INTRODUCCIÓN
-        // --------------------------------------------------------
+        // ========================================================
+        // 4. TERMINÓ INTRODUCCIÓN
+        // ========================================================
 
         Debug.Log(
-            $"[PinMapa] ✅ Terminó la introducción del pin {idPin}"
+            $"[PinMapa] ✅ Terminó introducción de {idPin}"
         );
 
-        // Ahora sí aparecen los objetos
+        // ========================================================
+        // 5. OCULTAR TEXTO
+        // ========================================================
+
+        OcultarRespuestaZylo();
+
+        // ========================================================
+        // 6. MOSTRAR MODELOS
+        // ========================================================
+
         MostrarObjetos();
 
         Debug.Log(
-            $"[PinMapa] 👁️ Objetos AR mostrados para {idPin}"
+            $"[PinMapa] 👁️ Modelos AR mostrados."
         );
 
-        // --------------------------------------------------------
-        // 3. ABRIR PANEL DE PREGUNTAS
-        // --------------------------------------------------------
+        // ========================================================
+        // 7. ABRIR PREGUNTAS
+        // ========================================================
 
         IniciarDialogoConPanel(gato);
+    }
+
+    // ============================================================
+    // BUSCAR RESPUESTA ZYLO EN LA ESCENA
+    // ============================================================
+
+    private void BuscarRespuestaZylo()
+    {
+        // --------------------------------------------------------
+        // Buscar el objeto RespuestaZylo en TODA LA ESCENA
+        // incluyendo objetos desactivados.
+        // --------------------------------------------------------
+
+        GameObject[] objetos =
+            Resources.FindObjectsOfTypeAll<GameObject>();
+
+        foreach (GameObject obj in objetos)
+        {
+            // Evitar objetos que sean assets/prefabs del proyecto
+            if (!obj.scene.IsValid())
+            {
+                continue;
+            }
+
+            if (obj.name == "RespuestaZylo")
+            {
+                respuestaZylo = obj;
+
+                // Buscar TextoRespuesta dentro de RespuestaZylo
+                TMP_Text[] textos =
+                    respuestaZylo.GetComponentsInChildren<TMP_Text>(
+                        true
+                    );
+
+                foreach (TMP_Text texto in textos)
+                {
+                    if (texto.gameObject.name == "TextoRespuesta")
+                    {
+                        textoRespuesta = texto;
+
+                        Debug.Log(
+                            "[PinMapa] ✅ Encontrado RespuestaZylo y TextoRespuesta en la escena."
+                        );
+
+                        return;
+                    }
+                }
+
+                Debug.LogWarning(
+                    "[PinMapa] ⚠️ Se encontró RespuestaZylo, pero no TextoRespuesta."
+                );
+
+                return;
+            }
+        }
+
+        Debug.LogError(
+            "[PinMapa] ❌ No se encontró RespuestaZylo en la escena."
+        );
+    }
+
+    // ============================================================
+    // MOSTRAR INTRODUCCIÓN
+    // ============================================================
+
+    private void MostrarIntroduccion()
+    {
+        // Si por alguna razón todavía no existe la referencia,
+        // volver a buscarla.
+        if (respuestaZylo == null || textoRespuesta == null)
+        {
+            BuscarRespuestaZylo();
+        }
+
+        // --------------------------------------------------------
+        // Activar RespuestaZylo
+        // --------------------------------------------------------
+
+        if (respuestaZylo != null)
+        {
+            respuestaZylo.SetActive(true);
+        }
+
+        // --------------------------------------------------------
+        // Escribir texto
+        // --------------------------------------------------------
+
+        if (textoRespuesta != null)
+        {
+            textoRespuesta.text = textoIntroduccion;
+            textoRespuesta.enabled = true;
+
+            Debug.Log(
+                $"[PinMapa] 📝 Texto de introducción mostrado:\n{textoIntroduccion}"
+            );
+        }
+        else
+        {
+            Debug.LogError(
+                "[PinMapa] ❌ No se encontró TextoRespuesta."
+            );
+        }
+    }
+
+    // ============================================================
+    // OCULTAR RESPUESTA ZYLO
+    // ============================================================
+
+    private void OcultarRespuestaZylo()
+    {
+        if (respuestaZylo != null)
+        {
+            respuestaZylo.SetActive(false);
+        }
     }
 
     // ============================================================
@@ -199,7 +385,7 @@ public class PinMapa : MonoBehaviour
     private void IniciarDialogoConPanel(CatController gato)
     {
         Debug.Log(
-            $"[PinMapa] Buscando PanelPreguntasZylo para {idPin}..."
+            $"[PinMapa] 🔎 Buscando PanelPreguntasZylo para {idPin}..."
         );
 
         PanelPreguntasZylo panelPreguntas = panelPreguntasZylo;
@@ -215,10 +401,13 @@ public class PinMapa : MonoBehaviour
         if (panelPreguntas != null)
         {
             Debug.Log(
-                $"[PinMapa] ✅ Panel encontrado. Iniciando preguntas para {idPin}"
+                $"[PinMapa] ✅ Panel encontrado."
             );
 
-            panelPreguntas.MostrarPanelPreguntas(this, gato);
+            panelPreguntas.MostrarPanelPreguntas(
+                this,
+                gato
+            );
         }
         else
         {
@@ -235,9 +424,11 @@ public class PinMapa : MonoBehaviour
     public void MostrarObjetos()
     {
         if (objetosAR == null)
+        {
             return;
+        }
 
-        foreach (var obj in objetosAR)
+        foreach (GameObject obj in objetosAR)
         {
             if (obj != null)
             {
@@ -253,9 +444,11 @@ public class PinMapa : MonoBehaviour
     public void OcultarObjetos()
     {
         if (objetosAR == null)
+        {
             return;
+        }
 
-        foreach (var obj in objetosAR)
+        foreach (GameObject obj in objetosAR)
         {
             if (obj != null)
             {

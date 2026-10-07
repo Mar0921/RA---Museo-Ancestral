@@ -3996,7 +3996,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7753467440054119049, guid: 4bfa0fb6f0eeced45ae00eab69f83d2d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4730142276752642251}
+    - targetCorrespondingSourceObject: {fileID: 7753467440054119049, guid: 4bfa0fb6f0eeced45ae00eab69f83d2d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1310954102764444694}
   m_SourcePrefab: {fileID: 100100000, guid: 4bfa0fb6f0eeced45ae00eab69f83d2d, type: 3}
 --- !u!4 &7577316574729252814 stripped
 Transform:
@@ -4008,6 +4014,53 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7753467440054119049, guid: 4bfa0fb6f0eeced45ae00eab69f83d2d, type: 3}
   m_PrefabInstance: {fileID: 1266587433386994708}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &4730142276752642251
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8793853324571625117}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10.25, y: 5.32, z: 9.39}
+  m_Center: {x: 0, y: 2.81, z: 0}
+--- !u!114 &1310954102764444694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8793853324571625117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b186ddd206c5cd4b8ae11a83a86094d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RotacionPanoramica
+  duracionGiro: 14
+  suavizado: 2
+  sensibilidadArrastre: 0.4
+  inercia: 0.92
+  inerciaMinima: 5
+  retardoVuelta: 1.5
+  velocidadVuelta: 90
+  ejeRotacion: {x: 0, y: 1, z: 0}
+  sonidoInicio: {fileID: 0}
+  sonidoDetener: {fileID: 0}
+  sonidoVuelta: {fileID: 0}
+  volumen: 1
+  ignorarUI: 1
+  umbralArrastre: 10
 --- !u!1001 &1944253539381489100
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4422,7 +4475,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: afab66847c0136d4989eec48eb71c8c8, type: 3}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: textoDelPin
-      value: "\u201CToda gran historia nace de un acto de valent\xEDa\u201D\r\nEn 1969, el gobierno cancel\xF3 la personer\xEDa jur\xEDdica de la Universidad Tecnol\xF3gica del Valle, dejando sin rumbo a cientos de estudiantes y profesores.\r\nPor lo que ellos mismos decidieron crear una nueva instituci\xF3n, libre y aut\xF3noma. As\xED naci\xF3 la Corporaci\xF3n Aut\xF3noma de Occidente, bajo la direcci\xF3n de May Ackerman.\r\nEra llamada \u201Cla universidad de la segunda oportunidad\u201D. En 1970, la Gobernaci\xF3n del Valle otorg\xF3 oficialmente la personer\xEDa jur\xEDdica, marcando el primer gran paso.\r\nMientras Cali crec\xEDa aceleradamente, con casi 860 mil habitantes, la nueva universidad se abr\xEDa camino dise\xF1ando su primer logo institucional y consolidando los cimientos de un proyecto que so\xF1aba con trascender.\r\n"
+      value: "Dicen los abuelos que el monte tiene due\xF1o, y que ese due\xF1o no se ve, se escucha.\r\n\r\nCuando un cazador entra al bosque buscando presa f\xE1cil, el aire cambia.\r\n\r\nLas hojas se agitan sin que sople el viento, y un crujido de ramas secas empieza a moverse entre los \xE1rboles, siempre un paso adelante, siempre un paso atr\xE1s.\r\n\r\nEs el Hojarasqu\xEDn del Monte.\r\n\r\nNaci\xF3 de la plegaria de quienes quer\xEDan proteger a los venados y a las dantas de quien solo busca matar por matar.\r\n\r\nNo tiene forma fija: es hojas, y ramas, es el propio bosque tomando cuerpo para cuidarse a s\xED mismo.\r\n\r\nNo ataca. Juega.\r\n\r\nDesordena caminos, invierte huellas, susurra donde no hay nadie, hasta que el intruso pierde el rumbo\r\ny con \xE9l, las ganas de seguir cazando.\r\n\r\nSi entras a su territorio con respeto, te deja pasar.\r\n\r\nSi entras a lastimarlo, te vas a perder en la espesura, dando vueltas sobre tus propios pasos, hasta que aprendas que este monte tiene quien lo cuide.\r\n"
       objectReference: {fileID: 0}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: audioRespuesta1
@@ -4436,6 +4489,12 @@ PrefabInstance:
       propertyPath: introduccionPin
       value: 
       objectReference: {fileID: 8300000, guid: f2dc22d71238e1d49bcf9150108c0b32, type: 3}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: textoIntroduccion
+      value: 'Hay hojas que se mueven sin viento, vamos a verlas de cerca
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: objetosAR.Array.size
       value: 1
@@ -4746,13 +4805,66 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5165482786991136811, guid: 79f638052af7f4e4a80d847ba90ae127, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2862861780464671481}
+    - targetCorrespondingSourceObject: {fileID: 5165482786991136811, guid: 79f638052af7f4e4a80d847ba90ae127, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3069681441366563171}
   m_SourcePrefab: {fileID: 100100000, guid: 79f638052af7f4e4a80d847ba90ae127, type: 3}
 --- !u!1 &6982953533367341445 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5165482786991136811, guid: 79f638052af7f4e4a80d847ba90ae127, type: 3}
   m_PrefabInstance: {fileID: 2830252914669990318}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &2862861780464671481
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6982953533367341445}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10.51, y: 5.86, z: 10}
+  m_Center: {x: 0, y: 2.68, z: 0}
+--- !u!114 &3069681441366563171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6982953533367341445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b186ddd206c5cd4b8ae11a83a86094d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RotacionPanoramica
+  duracionGiro: 14
+  suavizado: 2
+  sensibilidadArrastre: 0.4
+  inercia: 0.92
+  inerciaMinima: 5
+  retardoVuelta: 1.5
+  velocidadVuelta: 90
+  ejeRotacion: {x: 0, y: 1, z: 0}
+  sonidoInicio: {fileID: 0}
+  sonidoDetener: {fileID: 0}
+  sonidoVuelta: {fileID: 0}
+  volumen: 1
+  ignorarUI: 1
+  umbralArrastre: 10
 --- !u!4 &8683775808805378205 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6901181562773219635, guid: 79f638052af7f4e4a80d847ba90ae127, type: 3}
@@ -5449,7 +5561,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3188922767796712610, guid: f23164820f6e2e9479a6d5068cf7b07e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6612062794380679391}
+    - targetCorrespondingSourceObject: {fileID: 3188922767796712610, guid: f23164820f6e2e9479a6d5068cf7b07e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3608401685734986495}
   m_SourcePrefab: {fileID: 100100000, guid: f23164820f6e2e9479a6d5068cf7b07e, type: 3}
 --- !u!4 &7080210260092269653 stripped
 Transform:
@@ -5461,6 +5579,53 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3188922767796712610, guid: f23164820f6e2e9479a6d5068cf7b07e, type: 3}
   m_PrefabInstance: {fileID: 5192581452034129653}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &6612062794380679391
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7227878335671110231}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10.1, y: 3.52, z: 10.95}
+  m_Center: {x: 0, y: 1.7, z: 0}
+--- !u!114 &3608401685734986495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7227878335671110231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b186ddd206c5cd4b8ae11a83a86094d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RotacionPanoramica
+  duracionGiro: 14
+  suavizado: 2
+  sensibilidadArrastre: 0.4
+  inercia: 0.92
+  inerciaMinima: 5
+  retardoVuelta: 1.5
+  velocidadVuelta: 90
+  ejeRotacion: {x: 0, y: 1, z: 0}
+  sonidoInicio: {fileID: 0}
+  sonidoDetener: {fileID: 0}
+  sonidoVuelta: {fileID: 0}
+  volumen: 1
+  ignorarUI: 1
+  umbralArrastre: 10
 --- !u!1001 &5239096932210910042
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5516,7 +5681,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3959690233768979291, guid: f18f375c0557449488df801118483ae3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8367350857272424849}
+    - targetCorrespondingSourceObject: {fileID: 3959690233768979291, guid: f18f375c0557449488df801118483ae3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8073379298259328287}
   m_SourcePrefab: {fileID: 100100000, guid: f18f375c0557449488df801118483ae3, type: 3}
 --- !u!4 &8972246683691830073 stripped
 Transform:
@@ -5528,6 +5699,53 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3959690233768979291, guid: f18f375c0557449488df801118483ae3, type: 3}
   m_PrefabInstance: {fileID: 5239096932210910042}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &8367350857272424849
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9099144467883427841}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10.15, y: 4.02, z: 7.84}
+  m_Center: {x: 0, y: 1.76, z: 1.04}
+--- !u!114 &8073379298259328287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9099144467883427841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b186ddd206c5cd4b8ae11a83a86094d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RotacionPanoramica
+  duracionGiro: 14
+  suavizado: 2
+  sensibilidadArrastre: 0.4
+  inercia: 0.92
+  inerciaMinima: 5
+  retardoVuelta: 1.5
+  velocidadVuelta: 90
+  ejeRotacion: {x: 0, y: 1, z: 0}
+  sonidoInicio: {fileID: 0}
+  sonidoDetener: {fileID: 0}
+  sonidoVuelta: {fileID: 0}
+  volumen: 1
+  ignorarUI: 1
+  umbralArrastre: 10
 --- !u!1001 &7232392026607250576
 PrefabInstance:
   m_ObjectHideFlags: 0
