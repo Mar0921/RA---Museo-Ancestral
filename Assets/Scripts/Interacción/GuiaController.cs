@@ -4,9 +4,9 @@ using System.Collections;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(AudioSource))]
-public class CatController : MonoBehaviour
+public class GuiaController : MonoBehaviour
 {
-    [Header("Movimiento del gato")]
+    [Header("Movimiento del guía")]
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private float rotateSpeed = 10f;
     [SerializeField] private float stoppingDistance = 0.2f;
@@ -20,8 +20,8 @@ public class CatController : MonoBehaviour
     [SerializeField] private RuntimeAnimatorController animatorController;
 
     [Header("Animación de bienvenida")]
-    [SerializeField] private string animacionBienvenida = "isWaving"; // 👋 Nombre del parámetro en el Animator
-    [SerializeField] private float duracionAnimacionBienvenida = 2f; // Duración de la animación
+    [SerializeField] private string animacionBienvenida = "isWaving";
+    [SerializeField] private float duracionAnimacionBienvenida = 2f;
 
     private Animator animator;
     private AudioSource audioSource;
@@ -39,25 +39,24 @@ public class CatController : MonoBehaviour
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         cam = Camera.main;
-        // Asignar controller si falta
+
         if (animator != null && animator.runtimeAnimatorController == null && animatorController != null)
         {
             animator.runtimeAnimatorController = animatorController;
         }
 
-        // Validar antes de usar
         if (animator != null && animator.runtimeAnimatorController == null)
         {
             Debug.LogWarning($"⚠️ {gameObject.name}: Animator sin controller. Animaciones deshabilitadas.");
             animator = null;
         }
+
         animator?.SetBool("isWalking", false);
         animator?.SetBool("isTalking", false);
 
         audioSource.playOnAwake = false;
         audioSource.spatialBlend = 0.2f;
 
-        // Reproducir bienvenida al inicio
         if (audioBienvenida != null)
             StartCoroutine(ReproducirBienvenida());
     }
@@ -118,10 +117,9 @@ public class CatController : MonoBehaviour
             animator?.SetBool("isWalking", false);
             StartCoroutine(RotateToCamera());
 
-            // ✅ Cuando llega al pin, este se encarga del audio
             if (pinPendiente != null)
             {
-                pinPendiente.OnZyloLlego(this);
+                pinPendiente.OnGuiaLlego(this);
                 pinPendiente = null;
             }
 
@@ -135,7 +133,6 @@ public class CatController : MonoBehaviour
 
         Quaternion start = transform.rotation;
 
-        // Forzar dirección plana (sin inclinación vertical)
         Vector3 flatCamPos = new Vector3(cam.transform.position.x, transform.position.y, cam.transform.position.z);
         Vector3 lookDir = flatCamPos - transform.position;
 
@@ -149,7 +146,6 @@ public class CatController : MonoBehaviour
         }
     }
 
-
     private IEnumerator ReproducirBienvenida()
     {
         bienvenidaMostrada = true;
@@ -159,23 +155,19 @@ public class CatController : MonoBehaviour
         audioSource.clip = audioBienvenida;
         audioSource.Play();
 
-        if (SubtitulosZylo.Instance != null)
-            SubtitulosZylo.Instance.MostrarTexto(textoBienvenida);
+        if (SubtitulosMito.Instance != null)
+            SubtitulosMito.Instance.MostrarTexto(textoBienvenida);
 
-        // Esperar 2 segundos (duración del saludo)
         yield return new WaitForSeconds(2f);
 
-        // Dejar de saludar y seguir hablando
         animator?.SetBool("isWaving", false);
         animator?.SetBool("isTalking", true);
 
-        // Esperar el resto del audio
         yield return new WaitForSeconds(audioBienvenida.length - 2f);
 
         animator?.SetBool("isTalking", false);
     }
 
-    // Nuevo: solo para activar/desactivar animación de hablar
     public void SetTalking(bool estado)
     {
         if (animator != null && animator.runtimeAnimatorController != null)
@@ -187,15 +179,12 @@ public class CatController : MonoBehaviour
             Debug.LogWarning($"⚠️ No se puede activar animación de hablar en {gameObject.name}: Animator no configurado correctamente");
         }
     }
+
     public void TeletransportarA(Vector3 nuevaPosicion)
     {
-        // Cancelar cualquier movimiento en curso
         StopAllCoroutines();
-
-        // Actualizar posición
         transform.position = nuevaPosicion;
 
-        // Opcional: rotar hacia la cámara
         Transform cam = Camera.main?.transform;
         if (cam != null)
         {
@@ -207,21 +196,19 @@ public class CatController : MonoBehaviour
             }
         }
 
-        Debug.Log($"[CatController] Gato teletransportado a {nuevaPosicion}");
+        Debug.Log($"[GuiaController] Guía teletransportado a {nuevaPosicion}");
     }
+
     public void DetenerMovimiento()
     {
-        // Detener todas las coroutinas de movimiento
         StopAllCoroutines();
 
-        // Si tienes un Animator
         Animator animator = GetComponent<Animator>();
         if (animator != null)
         {
             animator.SetBool("isMoving", false);
             animator.SetBool("isWalking", false);
             animator.SetBool("isWaving", false);
-            // Añade aquí los parámetros de animación que uses
         }
     }
 }

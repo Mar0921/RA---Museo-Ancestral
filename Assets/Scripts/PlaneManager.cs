@@ -14,7 +14,7 @@ public class PlaneManager : MonoBehaviour
     [SerializeField] private ARRaycastManager arRaycastManager;
 
     [Header("Prefabs principales")]
-    [SerializeField] private GameObject catPrefab;
+    [SerializeField] private GameObject guiaPrefab;
     [Tooltip("Prefabs de mapas (máx. 5)")]
     [SerializeField] private List<GameObject> mapPrefabs = new List<GameObject>();
 
@@ -25,7 +25,7 @@ public class PlaneManager : MonoBehaviour
 
     private DocsTouch objetoActualEnExhibicion;
 
-    [Header("Posiciones fijas relativas al gato")]
+    [Header("Posiciones fijas relativas al guía")]
     [SerializeField]
     private List<Vector3> mapOffsets = new List<Vector3>()
     {
@@ -49,8 +49,8 @@ public class PlaneManager : MonoBehaviour
     private bool todosPinesCompletados = false;
     public bool TodosPinesCompletados => todosPinesCompletados;
 
-    private GameObject catInstance;
-    private CatController catController;
+    private GameObject guiaInstance;
+    private GuiaController guiaController;
     private readonly List<GameObject> mapInstances = new List<GameObject>();
     private int currentMapIndex = 0;
     private int currentPinIndex = 0;
@@ -62,13 +62,97 @@ public class PlaneManager : MonoBehaviour
     [Header("Botón FAB Épocas")]
     [SerializeField] private GameObject fabButton;
 
+    // ============================================================
+    // DIAGNÓSTICO
+    // ============================================================
+    private float timerDiagnostico = 0f;
+    private const float INTERVALO_DIAGNOSTICO = 2f;
+
     void Awake()
     {
+        // ============================================================
+        // DIAGNÓSTICO INICIAL
+        // ============================================================
+        Debug.Log("========== [PlaneManager] DIAGNÓSTICO INICIAL ==========");
+
+        // 1. Verificar arPlaneManager
         if (!arPlaneManager)
             arPlaneManager = GetComponent<ARPlaneManager>();
 
+        if (arPlaneManager == null)
+            Debug.LogError("[PlaneManager] ❌ arPlaneManager es NULL. No se puede detectar planos.");
+        else
+            Debug.Log($"[PlaneManager] ✅ arPlaneManager OK: {arPlaneManager.gameObject.name}");
+
+        // 2. Verificar arRaycastManager
         if (!arRaycastManager)
             arRaycastManager = FindFirstObjectByType<ARRaycastManager>();
+
+        if (arRaycastManager == null)
+            Debug.LogError("[PlaneManager] ❌ arRaycastManager es NULL. No se puede hacer raycast.");
+        else
+            Debug.Log($"[PlaneManager] ✅ arRaycastManager OK: {arRaycastManager.gameObject.name}");
+
+        // 3. Verificar guiaPrefab
+        if (guiaPrefab == null)
+        {
+            Debug.LogError("[PlaneManager] ❌ guiaPrefab es NULL. " +
+                           "Asigna el prefab del guía en el Inspector.");
+        }
+        else
+        {
+            Debug.Log($"[PlaneManager] ✅ guiaPrefab asignado: {guiaPrefab.name}");
+
+            GuiaController gc = guiaPrefab.GetComponent<GuiaController>();
+            if (gc == null)
+            {
+                Debug.LogError("[PlaneManager] ❌ El prefab del guía NO tiene el componente GuiaController.");
+            }
+            else
+            {
+                Debug.Log("[PlaneManager] ✅ El prefab del guía tiene GuiaController.");
+            }
+        }
+
+        // 4. Verificar mapPrefabs
+        if (mapPrefabs == null || mapPrefabs.Count == 0)
+        {
+            Debug.LogError("[PlaneManager] ❌ mapPrefabs está vacío. Asigna los prefabs de mapas.");
+        }
+        else
+        {
+            int nulos = 0;
+            for (int i = 0; i < mapPrefabs.Count; i++)
+            {
+                if (mapPrefabs[i] == null)
+                {
+                    Debug.LogError($"[PlaneManager] ❌ mapPrefabs[{i}] es NULL.");
+                    nulos++;
+                }
+                else
+                {
+                    Debug.Log($"[PlaneManager] ✅ mapPrefabs[{i}]: {mapPrefabs[i].name}");
+                }
+            }
+            if (nulos == 0)
+                Debug.Log($"[PlaneManager] ✅ Los {mapPrefabs.Count} prefabs de mapas están asignados.");
+        }
+
+        // 5. Verificar ARSession
+        ARSession arSession = FindFirstObjectByType<ARSession>();
+        if (arSession == null)
+            Debug.LogError("[PlaneManager] ❌ No hay ARSession en la escena.");
+        else
+            Debug.Log($"[PlaneManager] ✅ ARSession encontrado. enabled = {arSession.enabled}");
+
+        // 6. Verificar cámara AR
+        Camera arCamara = Camera.main;
+        if (arCamara == null)
+            Debug.LogError("[PlaneManager] ❌ No hay Camera.main en la escena.");
+        else
+            Debug.Log($"[PlaneManager] ✅ Camera.main OK: {arCamara.name}, enabled = {arCamara.enabled}");
+
+        Debug.Log("========== FIN DIAGNÓSTICO INICIAL ==========");
     }
 
     void Start()
@@ -82,21 +166,84 @@ public class PlaneManager : MonoBehaviour
     void Update()
     {
         if (contentPlaced) return;
+
+        timerDiagnostico += Time.deltaTime;
+        if (timerDiagnostico >= INTERVALO_DIAGNOSTICO)
+        {
+            timerDiagnostico = 0f;
+            DiagnosticoPeriodico();
+        }
+
         TryPlaceContentInFrontOfUser();
+    }
+
+    // ============================================================
+    // DIAGNÓSTICO PERIÓDICO
+    // ============================================================
+    private void DiagnosticoPeriodico()
+    {
+        Debug.Log("---------- [PlaneManager] DIAGNÓSTICO PERIÓDICO ----------");
+
+        Transform cam = Camera.main?.transform;
+        if (cam == null)
+        {
+            Debug.LogError("[PlaneManager] ❌ Camera.main es NULL.");
+            return;
+        }
+        Debug.Log($"[PlaneManager] ✅ Cámara en: {cam.position}");
+
+        if (arRaycastManager == null)
+        {
+            Debug.LogError("[PlaneManager] ❌ arRaycastManager es NULL.");
+            return;
+        }
+
+        if (arPlaneManager != null)
+        {
+            int planosDetectados = 0;
+            foreach (var plane in arPlaneManager.trackables)
+                planosDetectados++;
+
+            Debug.Log($"[PlaneManager] Planos detectados hasta ahora: {planosDetectados}");
+        }
+
+        Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        List<ARRaycastHit> hitsDiag = new List<ARRaycastHit>();
+        bool hitEncontrado = arRaycastManager.Raycast(screenCenter, hitsDiag, TrackableType.PlaneWithinPolygon);
+
+        if (hitEncontrado)
+        {
+            Debug.Log($"[PlaneManager] ✅ Raycast central encontró {hitsDiag.Count} hit(s). " +
+                      $"Posición: {hitsDiag[0].pose.position}");
+        }
+        else
+        {
+            Debug.LogWarning("[PlaneManager] ⚠️ Raycast central NO encontró plano. " +
+                             "Mueve el teléfono lentamente sobre una superficie con textura.");
+        }
+
+        if (guiaPrefab == null)
+            Debug.LogError("[PlaneManager] ❌ guiaPrefab es NULL.");
+        else if (guiaPrefab.GetComponent<GuiaController>() == null)
+            Debug.LogError("[PlaneManager] ❌ guiaPrefab no tiene GuiaController.");
+        else
+            Debug.Log("[PlaneManager] ✅ guiaPrefab listo.");
+
+        Debug.Log("---------- FIN DIAGNÓSTICO PERIÓDICO ----------");
     }
 
     private void TryPlaceContentInFrontOfUser()
     {
         if (arRaycastManager == null)
         {
-            Debug.LogError("[PlaneManager] ARRaycastManager no encontrado.");
+            Debug.LogError("[PlaneManager] ❌ ARRaycastManager no encontrado.");
             return;
         }
 
         Transform cam = Camera.main?.transform;
         if (cam == null)
         {
-            Debug.LogError("[PlaneManager] No se encontró la cámara principal.");
+            Debug.LogError("[PlaneManager] ❌ No se encontró la cámara principal.");
             return;
         }
 
@@ -104,6 +251,8 @@ public class PlaneManager : MonoBehaviour
 
         if (arRaycastManager.Raycast(screenCenter, hits, TrackableType.PlaneWithinPolygon))
         {
+            Debug.Log("[PlaneManager] ✅ Plano detectado. Iniciando instanciación...");
+
             ARRaycastHit hit = hits[0];
             Vector3 forward = cam.forward;
             forward.y = 0;
@@ -124,116 +273,110 @@ public class PlaneManager : MonoBehaviour
 
     private void PlaceContentAtPosition(Vector3 position)
     {
-        if (catPrefab == null)
+        Debug.Log("========== [PlaneManager] PLACE CONTENT ==========");
+
+        if (guiaPrefab == null)
         {
-            Debug.LogWarning("[PlaneManager] Asigna el prefab del gato.");
+            Debug.LogError("[PlaneManager] ❌ guiaPrefab es NULL. No se puede instanciar.");
+            return;
+        }
+
+        GuiaController prefabGuiaComponent = guiaPrefab.GetComponent<GuiaController>();
+        if (prefabGuiaComponent == null)
+        {
+            Debug.LogError("[PlaneManager] ❌ guiaPrefab no tiene GuiaController.");
             return;
         }
 
         Transform cam = Camera.main?.transform;
         if (cam == null)
         {
-            Debug.LogError("[PlaneManager] No se encontró la cámara principal.");
+            Debug.LogError("[PlaneManager] ❌ Camera.main es NULL.");
             return;
         }
 
-        // Colocar el gato
-        Vector3 directionToCat = cam.position - position;
-        directionToCat.y = 0;
-        Quaternion catRotation = Quaternion.LookRotation(directionToCat);
-        catInstance = Instantiate(catPrefab, position, catRotation);
-        catController = catInstance.GetComponent<CatController>();
+        // ============================================================
+        // 1. Instanciar el guía
+        // ============================================================
+        Vector3 directionToGuia = cam.position - position;
+        directionToGuia.y = 0;
+        Quaternion guiaRotation = Quaternion.LookRotation(directionToGuia);
+        guiaInstance = Instantiate(guiaPrefab, position, guiaRotation);
+        guiaController = guiaInstance.GetComponent<GuiaController>();
 
-        if (verbose)
-            Debug.Log($"[PlaneManager] Gato colocado en: {position}");
+        // ============================================================
+        // 2. Activar el panel de subtítulos justo cuando aparece el guía
+        // ============================================================
+        ActivarPanelSubtitulos();
+
+        if (guiaController == null)
+            Debug.LogError("[PlaneManager] ❌ La instancia del guía no tiene GuiaController.");
+        else
+            Debug.Log($"[PlaneManager] ✅ Guía instanciado en: {position}");
 
         if (mapPrefabs.Count == 0 || mapPrefabs[0] == null)
         {
-            Debug.LogError("[PlaneManager] No hay prefabs de mapas asignados.");
+            Debug.LogError("[PlaneManager] ❌ No hay prefabs de mapas asignados.");
             return;
         }
 
         string[] decadas = { "70s", "80s", "90s", "2000s", "2010s" };
 
-        // === PASO 1: Colocar el primer mapa (70s) detrás del gato ===
         Vector3 offset = (0 < mapOffsets.Count) ? mapOffsets[0] : new Vector3(0f, 0f, 0.5f);
-        Vector3 firstMapPos = catInstance.transform.position + catInstance.transform.TransformDirection(offset);
+        Vector3 firstMapPos = guiaInstance.transform.position + guiaInstance.transform.TransformDirection(offset);
         firstMapPos.y = position.y;
 
-        // Rotación: el mapa mira hacia el gato
-        Vector3 lookDir = catInstance.transform.position - firstMapPos;
+        Vector3 lookDir = guiaInstance.transform.position - firstMapPos;
         lookDir.y = 0;
-        Quaternion rotacionHaciaGato = Quaternion.LookRotation(lookDir);
+        Quaternion rotacionHaciaGuia = Quaternion.LookRotation(lookDir);
 
-        GameObject firstMap = Instantiate(mapPrefabs[0], firstMapPos, rotacionHaciaGato);
+        GameObject firstMap = Instantiate(mapPrefabs[0], firstMapPos, rotacionHaciaGuia);
         firstMap.name = "Map_1_70s";
 
         Transform primerPin = EncontrarPinPrincipalPorNombre(firstMap);
         if (primerPin == null)
         {
-            Debug.LogError("[PlaneManager] ❌ No se encontró pin principal en 70s");
+            Debug.LogError("[PlaneManager] ❌ No se encontró pin principal en 70s.");
             Destroy(firstMap);
             return;
         }
 
-        // REFERENCIAS DEL PRIMER MAPA (70s - AZUL)
-        Vector3 posicionPrimerMapa = firstMap.transform.position;
         Vector3 posicionPinReferencia = primerPin.position;
         float yReferencia = firstMap.transform.position.y;
         Quaternion rotacionReferencia = firstMap.transform.rotation;
 
-        // 🔥 OBTENER POSICIÓN ORIGINAL DEL PIN EN EL PREFAB (sin instanciar)
         Transform pinPrefabOriginal = EncontrarPinPrincipalPorNombre(mapPrefabs[0]);
         Vector3 posicionOriginalPinPrefab70s = Vector3.zero;
         if (pinPrefabOriginal != null)
-        {
             posicionOriginalPinPrefab70s = pinPrefabOriginal.position;
-            Debug.Log($"[PlaneManager] Posición original del pin en prefab 70s: {posicionOriginalPinPrefab70s}");
-        }
 
-        Debug.Log($"[PlaneManager] === CONFIGURACIÓN BASE (70s - AZUL) ===");
-        Debug.Log($"  Posición gato: {catInstance.transform.position}");
-        Debug.Log($"  Posición mapa 70s: {firstMap.transform.position}");
-        Debug.Log($"  Posición PIN 70s (REFERENCIA): {posicionPinReferencia}");
-        Debug.Log($"  Rotación de referencia: {rotacionReferencia.eulerAngles}");
+        Debug.Log($"[PlaneManager] Posición guía: {guiaInstance.transform.position}");
+        Debug.Log($"[PlaneManager] Posición PIN 70s (REFERENCIA): {posicionPinReferencia}");
 
         firstMap.SetActive(false);
         mapInstances.Add(firstMap);
 
-        // === PASO 2: Colocar mapas usando sus posiciones originales relativas al de 70s ===
         for (int i = 1; i < mapPrefabs.Count && i < 5; i++)
         {
             if (mapPrefabs[i] == null)
             {
-                Debug.LogWarning($"[PlaneManager] Prefab {i} es NULL");
+                Debug.LogWarning($"[PlaneManager] Prefab {i} es NULL. Saltando.");
                 continue;
             }
 
-            Debug.Log($"\n[{decadas[i]}] === Procesando mapa {i + 1} ===");
-
-            // 🔥 OBTENER PIN ORIGINAL DEL PREFAB (sin instanciar)
             Transform pinPrefabActual = EncontrarPinPrincipalPorNombre(mapPrefabs[i]);
-
             if (pinPrefabActual == null)
             {
-                Debug.LogError($"[{decadas[i]}] ❌ No se encontró pin en el prefab");
+                Debug.LogError($"[PlaneManager] ❌ No se encontró pin en el prefab {decadas[i]}.");
                 continue;
             }
 
-            // 🔥 CALCULAR OFFSET ENTRE EL PIN DE ESTE PREFAB Y EL PIN DEL PREFAB 70s
             Vector3 offsetEntrePinesPrefab = pinPrefabActual.position - posicionOriginalPinPrefab70s;
-            Debug.Log($"[{decadas[i]}] Offset original entre pines (en prefabs): {offsetEntrePinesPrefab}");
+            Vector3 offsetRotado = rotacionHaciaGuia * offsetEntrePinesPrefab;
 
-            // 🔥 APLICAR ROTACIÓN al offset
-            Vector3 offsetRotado = rotacionHaciaGato * offsetEntrePinesPrefab;
-            Debug.Log($"[{decadas[i]}] Offset rotado: {offsetRotado}");
-
-            // 🔥 CALCULAR POSICIÓN DEL PIN EN LA ESCENA
             Vector3 targetPinPosition = posicionPinReferencia + offsetRotado;
             targetPinPosition.y = yReferencia;
-            Debug.Log($"[{decadas[i]}] Target pin position: {targetPinPosition}");
 
-            // Instanciar el mapa
             GameObject nuevoMapa = Instantiate(mapPrefabs[i], firstMap.transform.position, rotacionReferencia);
             nuevoMapa.name = $"Map_{i + 1}_{decadas[i]}";
 
@@ -241,52 +384,21 @@ public class PlaneManager : MonoBehaviour
 
             if (pinNuevo != null)
             {
-                Debug.Log($"[{decadas[i]}] Pin encontrado: {pinNuevo.name}");
-
-                // 🔥 CALCULAR OFFSET del pin respecto a la raíz del mapa instanciado
                 Vector3 offsetPinWorld = pinNuevo.position - nuevoMapa.transform.position;
-                Debug.Log($"[{decadas[i]}] Offset pin->raíz (world): {offsetPinWorld}");
-
-                // 🔥 MOVER LA RAÍZ para que el pin quede en targetPinPosition
                 Vector3 nuevaPosicionRaiz = targetPinPosition - offsetPinWorld;
                 nuevaPosicionRaiz.y = yReferencia;
 
                 nuevoMapa.transform.position = nuevaPosicionRaiz;
 
-                Debug.Log($"[{decadas[i]}] Nueva posición raíz: {nuevoMapa.transform.position}");
-                Debug.Log($"[{decadas[i]}] Nueva posición pin: {pinNuevo.position}");
-
-                // VERIFICACIÓN
-                float distPinDesdeReferencia = Vector3.Distance(posicionPinReferencia, pinNuevo.position);
-                Debug.Log($"[{decadas[i]}] ✅ Distancia pin desde 70s: {distPinDesdeReferencia:F3}m");
-
-                float distRaices = Vector3.Distance(firstMap.transform.position, nuevoMapa.transform.position);
-                Debug.Log($"[{decadas[i]}] Distancia entre raíces: {distRaices:F3}m");
-
-                if (distRaices < 0.1f)
-                {
-                    Debug.LogError($"[{decadas[i]}] ⚠️⚠️⚠️ ADVERTENCIA: Mapas muy cercanos");
-                }
+                Debug.Log($"[PlaneManager] ✅ Mapa {decadas[i]} colocado. Pin en {pinNuevo.position}");
 
                 nuevoMapa.SetActive(false);
                 mapInstances.Add(nuevoMapa);
             }
             else
             {
-                Debug.LogError($"[PlaneManager] ❌ No se encontró pin en la instancia de {decadas[i]}");
+                Debug.LogError($"[PlaneManager] ❌ No se encontró pin en la instancia de {decadas[i]}.");
                 Destroy(nuevoMapa);
-            }
-        }
-
-        // === VERIFICACIÓN FINAL ===
-        Debug.Log("\n[PlaneManager] === VERIFICACIÓN FINAL DE ALINEACIÓN ===");
-        for (int i = 0; i < mapInstances.Count; i++)
-        {
-            Transform pin = EncontrarPinPrincipalPorNombre(mapInstances[i]);
-            if (pin != null)
-            {
-                float dist = Vector3.Distance(posicionPinReferencia, pin.position);
-                Debug.Log($"  {decadas[i]}: Pin en {pin.position}, distancia desde 70s = {dist:F3}m");
             }
         }
 
@@ -296,28 +408,54 @@ public class PlaneManager : MonoBehaviour
             currentPinIndex = 0;
             MostrarMapaYPrimerPin();
         }
+
+        InsigniasManager.Instance?.CalcularTotalPines();
+
+        Debug.Log("========== FIN PLACE CONTENT ==========");
+    }
+
+    // ============================================================
+    // ACTIVAR PANEL DE SUBTÍTULOS
+    // ============================================================
+    private void ActivarPanelSubtitulos()
+    {
+        GameObject[] objetos = Resources.FindObjectsOfTypeAll<GameObject>();
+        foreach (GameObject obj in objetos)
+        {
+            if (!obj.scene.IsValid()) continue;
+
+            // Busca PanelSubtitulos o RespuestaMito (por si aún no lo renombraste)
+            if (obj.name == "PanelSubtitulos" || obj.name.Contains("PanelSubtitulos") ||
+                obj.name == "RespuestaMito" || obj.name.Contains("RespuestaMito"))
+            {
+                if (!obj.activeSelf)
+                {
+                    obj.SetActive(true);
+                    Debug.Log($"[PlaneManager] ✅ PanelSubtitulos activado: {obj.name}");
+                }
+                else
+                {
+                    Debug.Log($"[PlaneManager] ℹ️ PanelSubtitulos ya estaba activo: {obj.name}");
+                }
+                return;
+            }
+        }
+        Debug.LogWarning("[PlaneManager] ⚠️ No se encontró PanelSubtitulos ni RespuestaMito en la escena.");
     }
 
     private Transform EncontrarPinPrincipalPorNombre(GameObject mapa)
     {
         Transform[] todosLosHijos = mapa.GetComponentsInChildren<Transform>(true);
-
         foreach (Transform hijo in todosLosHijos)
         {
             if (hijo.name.Contains("PinPrincipal"))
-            {
                 return hijo;
-            }
         }
-
         Debug.LogError($"[EncontrarPinPrincipal] ❌ NO encontrado en '{mapa.name}'");
         return null;
     }
 
-    public bool PuedeAvanzar()
-    {
-        return listoParaAvanzar;
-    }
+    public bool PuedeAvanzar() => listoParaAvanzar;
 
     public void NotificarPinCompletado(PinMapa pin)
     {
@@ -330,7 +468,6 @@ public class PlaneManager : MonoBehaviour
 
         GameObject currentMap = mapInstances[currentMapIndex];
         PinMapa[] pins = currentMap.GetComponentsInChildren<PinMapa>(true);
-
         System.Array.Sort(pins, (a, b) => a.OrdenPin.CompareTo(b.OrdenPin));
 
         if (currentPinIndex + 1 < pins.Length)
@@ -353,37 +490,20 @@ public class PlaneManager : MonoBehaviour
     private IEnumerator SecuenciaCompletarMapa(PinMapa[] pins)
     {
         listoParaAvanzar = true;
-        Debug.Log("[DEBUG] SecuenciaCompletarMapa started. listoParaAvanzar set to true.");
-
         MarcarTodosPinesComoCompletados(pins);
-        Debug.Log("[DEBUG] Pins marked complete.");
         yield return new WaitForSeconds(0.3f);
 
-        PanelPreguntasZylo panel = FindFirstObjectByType<PanelPreguntasZylo>(FindObjectsInactive.Include);
-        panel?.CerrarTodo();
-        Debug.Log("[DEBUG] Panel closed.");
+        QuizManagerMito quiz = FindFirstObjectByType<QuizManagerMito>(FindObjectsInactive.Include);
+        quiz?.Cerrar();
         yield return new WaitForSeconds(0.2f);
 
-        Debug.Log("[DEBUG] Waiting 1.5s before activating object...");
         yield return new WaitForSeconds(tiempoEsperaAntesDeObjeto);
 
         GameObject mapaActual = mapInstances[currentMapIndex];
-        Debug.Log($"[DEBUG] Current map: {mapaActual?.name}, active: {mapaActual?.activeSelf}");
-
         ObjetoInteractivoCambioMapa objetoAvanzar = mapaActual.GetComponentInChildren<ObjetoInteractivoCambioMapa>(true);
-        Debug.Log($"[DEBUG] ObjetoInteractivoCambioMapa found: {objetoAvanzar != null}, name: {objetoAvanzar?.name}, current active: {objetoAvanzar?.gameObject.activeSelf}");
 
         if (objetoAvanzar != null)
-        {
             objetoAvanzar.gameObject.SetActive(true);
-            Debug.Log("[DEBUG] ObjetoInteractivoCambioMapa ACTIVATED!");
-        }
-        else
-        {
-            Debug.LogWarning("[DEBUG] ObjetoInteractivoCambioMapa NOT FOUND in map.");
-        }
-
-        Debug.Log("[DEBUG] SecuenciaCompletarMapa completed.");
     }
 
     private void MarcarTodosPinesComoCompletados(PinMapa[] pins)
@@ -392,69 +512,34 @@ public class PlaneManager : MonoBehaviour
         {
             Transform letrero = pin.transform.Find("Letrero");
             if (letrero != null)
-            {
                 letrero.gameObject.SetActive(false);
-            }
-
-            if (verbose)
-                Debug.Log($"[PlaneManager] ✓ Pin {pin.name} marcado como completado.");
         }
     }
 
     public void OnObjetoAvanzarClickeado()
     {
-        Debug.Log($"[PlaneManager] 🎯 OnObjetoAvanzarClickeado() llamado. listoParaAvanzar = {listoParaAvanzar}");
-
-        if (!listoParaAvanzar)
-        {
-            Debug.LogWarning("[PlaneManager] ⚠️ No está listo para avanzar. Abortando.");
-            return;
-        }
-
-        Debug.Log("[PlaneManager] 👆 Click en objeto para avanzar CONFIRMADO.");
+        if (!listoParaAvanzar) return;
 
         if (currentMapIndex < mapInstances.Count)
         {
             GameObject mapaActual = mapInstances[currentMapIndex];
-            Debug.Log($"[PlaneManager] 🗺️ Buscando ObjetoInteractivoCambioMapa en mapa {currentMapIndex}");
-
             ObjetoInteractivoCambioMapa objetoAvanzar = mapaActual.GetComponentInChildren<ObjetoInteractivoCambioMapa>(true);
 
             if (objetoAvanzar != null)
-            {
-                Debug.Log($"[PlaneManager] 🔘 Desactivando objeto: {objetoAvanzar.name}");
                 objetoAvanzar.gameObject.SetActive(false);
-            }
-            else
-            {
-                Debug.LogWarning("[PlaneManager] ⚠️ No se encontró ObjetoInteractivoCambioMapa para desactivar.");
-            }
-        }
-        else
-        {
-            Debug.LogWarning($"[PlaneManager] ⚠️ currentMapIndex ({currentMapIndex}) fuera de rango.");
         }
 
-        Debug.Log("[PlaneManager] 🚀 Llamando a AvanzarAlSiguienteMapa()...");
         AvanzarAlSiguienteMapa();
     }
 
     private void OcultarMapaActual()
     {
         if (currentMapIndex >= mapInstances.Count) return;
-
-        GameObject mapaActual = mapInstances[currentMapIndex];
-        mapaActual.SetActive(false);
-
-        if (verbose)
-            Debug.Log($"[PlaneManager] 🙈 Mapa {currentMapIndex + 1} ocultado.");
+        mapInstances[currentMapIndex].SetActive(false);
     }
 
     public void AvanzarAlSiguienteMapa()
     {
-        if (verbose)
-            Debug.Log($"[PlaneManager] 🔄 Cambio de mapa {currentMapIndex + 1} → {currentMapIndex + 2}");
-
         OcultarMapaActual();
         listoParaAvanzar = false;
 
@@ -463,10 +548,8 @@ public class PlaneManager : MonoBehaviour
 
         if (currentMapIndex < mapInstances.Count)
         {
-            if (catController != null)
-            {
-                catController.DetenerMovimiento();
-            }
+            if (guiaController != null)
+                guiaController.DetenerMovimiento();
 
             StartCoroutine(CambiarANuevoMapa());
         }
@@ -481,11 +564,7 @@ public class PlaneManager : MonoBehaviour
     private IEnumerator CambiarANuevoMapa()
     {
         yield return new WaitForEndOfFrame();
-
         MostrarMapaYPrimerPin();
-
-        if (verbose)
-            Debug.Log($"[PlaneManager] ✅ Cambio a mapa {currentMapIndex + 1} completado");
     }
 
     public List<GameObject> GetMapas() => mapInstances;
@@ -500,9 +579,8 @@ public class PlaneManager : MonoBehaviour
         System.Array.Sort(pins, (a, b) => a.OrdenPin.CompareTo(b.OrdenPin));
 
         for (int i = 0; i <= currentPinIndex && i < pins.Length; i++)
-        {
             lista.Add(pins[i].name);
-        }
+
         return lista;
     }
 
@@ -515,12 +593,9 @@ public class PlaneManager : MonoBehaviour
 
         PinMapa[] pins = mapa.GetComponentsInChildren<PinMapa>(true);
         foreach (var pin in pins)
-        {
             pin.gameObject.SetActive(pin.name == pinName);
-        }
 
         currentMapIndex = mapIndex;
-        Debug.Log($"[PlaneManager] Regresando a {pinName} en {ObtenerNombreMapa(mapIndex)}");
     }
 
     private void MostrarMapaYPrimerPin()
@@ -531,11 +606,7 @@ public class PlaneManager : MonoBehaviour
         currentMap.SetActive(true);
 
         PinMapa[] pins = currentMap.GetComponentsInChildren<PinMapa>(true);
-        if (pins.Length == 0)
-        {
-            Debug.LogWarning($"[PlaneManager] El mapa {currentMapIndex + 1} no tiene pines.");
-            return;
-        }
+        if (pins.Length == 0) return;
 
         System.Array.Sort(pins, (a, b) => a.OrdenPin.CompareTo(b.OrdenPin));
 
@@ -562,14 +633,7 @@ public class PlaneManager : MonoBehaviour
         if (currentMapIndex >= mapInstances.Count && todosPinesCompletados)
         {
             if (fabButton != null)
-            {
                 fabButton.SetActive(true);
-                Debug.Log("[PlaneManager] 🎯 FAB activado: todas las épocas completadas.");
-            }
-            else
-            {
-                Debug.LogWarning("[PlaneManager] No se asignó el FABButton en el inspector.");
-            }
         }
     }
 
@@ -584,14 +648,9 @@ public class PlaneManager : MonoBehaviour
 
         var btn = botonSalirExhibicion.GetComponent<Button>();
         btn.onClick.RemoveAllListeners();
-        btn.onClick.AddListener(() =>
-        {
-            objetoActualEnExhibicion?.SalirDeExhibicion();
-        });
-
-        Debug.Log($"[PlaneManager] Mostrando objeto: {nombre}");
+        btn.onClick.AddListener(() => objetoActualEnExhibicion?.SalirDeExhibicion());
     }
-    //Mostrar coleccionable sin cerrar el panel de preguntas
+
     public void MostrarColeccionableSinAvanzar()
     {
         if (currentMapIndex >= mapInstances.Count) return;
@@ -603,27 +662,14 @@ public class PlaneManager : MonoBehaviour
         {
             objetoAvanzar.gameObject.SetActive(true);
             listoParaAvanzar = true;
-            Debug.Log("[PlaneManager] 🎁 Coleccionable activado (panel de preguntas sigue abierto).");
-        }
-        else
-        {
-            Debug.LogWarning("[PlaneManager] No se encontró ObjetoInteractivoCambioMapa.");
         }
     }
+
     public void OcultarPanelExhibicion()
     {
-        if (panelExhibicion != null)
-            panelExhibicion.SetActive(false);
-
-        if (botonSalirExhibicion != null)
-            botonSalirExhibicion.gameObject.SetActive(false);
-
-        if (textoTituloObjeto != null)
-            textoTituloObjeto.text = "";
-
+        if (panelExhibicion != null) panelExhibicion.SetActive(false);
+        if (botonSalirExhibicion != null) botonSalirExhibicion.gameObject.SetActive(false);
+        if (textoTituloObjeto != null) textoTituloObjeto.text = "";
         objetoActualEnExhibicion = null;
-
-        if (verbose)
-            Debug.Log("[PlaneManager] Panel de exhibición ocultado.");
     }
 }

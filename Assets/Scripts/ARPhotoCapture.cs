@@ -9,16 +9,16 @@ using System.Collections.Generic;
 public class ARPhotoManager : MonoBehaviour
 {
     [Header("UI Elements")]
-    public GameObject capturePanel;           // Panel con el marco y la UI principal
-    public GameObject previewPanel;           // Panel para previsualizar la foto
-    public RawImage previewImage;             // Imagen en la previsualización
-    public Button captureButton;              // Botón para tomar foto
-    public Button downloadButton;             // Botón de descarga (en previsualización)
-    public Button retryButton;                // Botón para volver del preview al marco
-    public List<RawImage> photoSlots;         // Recuadros inferiores donde se muestran fotos guardadas
+    public GameObject capturePanel;
+    public GameObject previewPanel;
+    public RawImage previewImage;
+    public Button captureButton;
+    public Button downloadButton;
+    public Button retryButton;
+    public List<RawImage> photoSlots;
 
     [Header("Animaciones y efectos")]
-    public AudioSource shutterSound;          // Sonido al tomar la foto (opcional)
+    public AudioSource shutterSound;
 
     private Texture2D lastCapturedPhoto;
     private int nextSlotIndex = 0;
@@ -31,29 +31,42 @@ public class ARPhotoManager : MonoBehaviour
                 Permission.RequestUserPermission(Permission.ExternalStorageWrite);
         }
 
-        captureButton.onClick.AddListener(() => StartCoroutine(CapturePhoto()));
-        retryButton.onClick.AddListener(() => {
-            previewPanel.SetActive(false);
-            capturePanel.SetActive(true);
-        });
-        downloadButton.onClick.AddListener(DownloadPhotoFromPreview);
+        if (captureButton != null)
+            captureButton.onClick.AddListener(() => StartCoroutine(CapturePhoto()));
+
+        if (retryButton != null)
+        {
+            retryButton.onClick.AddListener(() =>
+            {
+                previewPanel.SetActive(false);
+                capturePanel.SetActive(true);
+            });
+        }
+
+        if (downloadButton != null)
+            downloadButton.onClick.AddListener(DownloadPhotoFromPreview);
 
         foreach (var slot in photoSlots)
         {
             RawImage currentSlot = slot;
             Button btn = slot.GetComponent<Button>();
             if (btn != null)
-            {
                 btn.onClick.AddListener(() => OpenPhotoPreview(currentSlot.texture));
-            }
         }
 
         previewPanel.SetActive(false);
         capturePanel.SetActive(true);
     }
 
-    IEnumerator CapturePhoto()
+    // ============================================================
+    // CAPTURA DE FOTO (ahora público para poder invocarse desde
+    // RecompensaFinal)
+    // ============================================================
+
+    public IEnumerator CapturePhoto()
     {
+        Debug.Log("📸 Se hizo clic en el botón de tomar foto");
+
         yield return new WaitForEndOfFrame();
 
         Texture2D photo = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
@@ -61,37 +74,20 @@ public class ARPhotoManager : MonoBehaviour
         photo.Apply();
 
         lastCapturedPhoto = photo;
-        shutterSound?.Play();
 
-        // Añadir directamente a los slots
+        if (shutterSound != null)
+            shutterSound.Play();
+
         if (nextSlotIndex < photoSlots.Count)
         {
             photoSlots[nextSlotIndex].texture = lastCapturedPhoto;
             nextSlotIndex++;
         }
-
-
-        IEnumerator CapturePhoto()
-        {
-            Debug.Log("📸 Se hizo clic en el botón de tomar foto");
-
-            yield return new WaitForEndOfFrame();
-
-            Texture2D photo = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
-            photo.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
-            photo.Apply();
-
-            lastCapturedPhoto = photo;
-            shutterSound?.Play();
-
-            if (nextSlotIndex < photoSlots.Count)
-            {
-                photoSlots[nextSlotIndex].texture = lastCapturedPhoto;
-                nextSlotIndex++;
-            }
-        }
-
     }
+
+    // ============================================================
+    // PREVISUALIZACIÓN
+    // ============================================================
 
     void OpenPhotoPreview(Texture texture)
     {
@@ -102,6 +98,10 @@ public class ARPhotoManager : MonoBehaviour
         capturePanel.SetActive(false);
         lastCapturedPhoto = texture as Texture2D;
     }
+
+    // ============================================================
+    // DESCARGA
+    // ============================================================
 
     void DownloadPhotoFromPreview()
     {

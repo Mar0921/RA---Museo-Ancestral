@@ -1,26 +1,9 @@
-1969_1971-¿Cómo nació la UAO?-¿Quién lideró sus primeros pasos?
-1971_1973-¿Qué se logró en 1972?-¿Por qué es importante Luis H. Pérez?
-1973_1975-¿Cuál fue el primer programa profesional aprobado?-¿Qué nuevas carreras llegaron en 1975?
-1975_1977-¿Qué ocurrió en 1976?-¿Qué simbolizó el desfile de 1977?
-1977_1979-¿Qué avance tecnológico llegó en 1978?-¿Qué se propuso en 1979?
-1980_1982-¿Por qué la Autónoma necesitaba un plan de desarrollo?-¿Qué es un plan de desarrollo?
-1982_1984-¿Por qué la institución adoptó el nombre de Corporación Universitaria Autónoma de Occidente?-¿Qué significó la apertura de las jornadas diurnas en Ingeniería y Economía?
-1984_1986-¿Por qué en 1986 fue tan importante para la Autónoma?-¿De dónde salió la idea del trabajo social de la Autónoma?
-1986_1988-¿De dónde salió el dinero para construir el campus de la Autónoma?-¿Qué decisión estratégica tomó la Universidad entre 1986 y 1987 con los recursos del Fondo Pro-Sede?
-1988_1990-¿Dónde empezó a construirse el campus que conocemos hoy?-¿Qué nuevo programa nació ese año?
-1990_1992-¿Qué medio ayudó a posicionar a la UAO en el entorno educativo regional durante los primeros años de los 90?-¿Cómo logró la UAO posicionarse en el entorno educativo regional en esos años?
-1992_1994-¿Qué función cumple la Vicerrectoría Administrativa que se creó en 1993?-¿Qué iniciativa ambiental se lanzó en los años 90 como parte de la sostenibilidad institucional?
-1994_1996-¿Cómo se presentó el modelo del nuevo campus en 1996?-¿Qué representa el proyecto Valle del Lili para la UAO?
-1996_1998-¿Qué tipo de participación tuvo la comunidad universitaria en la construcción del campus?-¿Qué tipo de informes se elaboraron en 1998 para documentar el avance del campus?
-1998_2000-¿Qué tipo de formación se fortaleció en los laboratorios del campus Champagnat en 1999?-¿Cómo se evidenció el impacto de la UAO en la región al final de los 90?
-2000_2002-¿Qué medio de comunicación se integró al campus universitario?-¿Cuál fue el primer programa en recibir acreditación de alta calidad?
-2002_2004-¿Qué especialización se ofrece en modalidad virtual con enfoque ambiental?-¿Qué programa académico recibió acreditación por su calidad?
-2004_2006-¿Qué certificación valida los procesos de calidad institucional?-¿Qué exposición se presentó en el nuevo museo?
-2006_2008-¿Qué programa recibió acreditación por su enfoque ambiental?-¿Qué alianza internacional amplió las oportunidades de intercambio académico?
-2008_2010-¿Qué programas académicos respondieron a la convergencia entre tecnología, sostenibilidad y medios digitales?-¿Qué función cumplen los eventos como la Noche de los Mejores y Talento Autónomo en la cultura institucional?
-2010_2012-¿Qué programa conectó la UAO con colegios de educación media al inicio de la década?-¿Qué certificación ambiental obtuvo la UAO en 2012?
-2012_2014-¿Qué centro impulsó la innovación TIC en 2013?-¿Qué iniciativa de campus se lanzó en 2014?
-2014_2016-¿Qué logro de propiedad intelectual destacó en 2015?-¿Qué primer hito de posgrado alcanzó la UAO en 2016?
-2016_2018-¿Qué reconocimiento institucional se renovó en 2017?-¿En qué ranking de sostenibilidad destacó la UAO en 2018?
-2018_2020-¿Qué premio ambiental recibió la UAO en 2019?-¿Qué estrategia educativa se consolidó en 2020 por la pandemia?
-2021_2023-¿Qué acreditación internacional lograron tres ingenierías en 2022?-¿Qué hito institucional se celebró en 2023 con enfoque comunitario?
+hojarasquin|¿Qué hace el Hojarasquín cuando un cazador entra al monte?|Invierte las huellas para proteger a los animales|Lo persigue hasta que sale del monte|¿Por qué el Hojarasquín invierte las huellas?|Para confundir a quienes entran al monte a hacer daño|Por diversión
+madremonte|¿A quiénes castiga la Madremonte?|A cazadores, aserradores y pescadores que invaden sus dominios|A quienes respetan el monte|¿Qué representa la Madremonte?|Una advertencia para quienes toman del monte sin medida|Una diosa que premia a los cazadores
+madre_de_agua|¿Qué se debe hacer al visitar una quebrada o un río?|Respetarlo, no contaminarlo y no tomar más de lo necesario|Gritar junto al lago para llamar a la Madre de Agua|¿Qué hace la Madre de Agua con quien ensucia el río o pesca de más?|Se lo lleva al fondo|Le regala buena pesca
+mohan|¿Qué era un mohán entre los pijaos?|Un cargo relacionado con el sacerdote, el curandero y el conocimiento de las señales|Un espanto que asustaba a los pescadores|¿Qué hay que darle al Mohán antes de cruzar su río?|Una ofrenda, como tabaco, aguardiente o sal|Nada, se cruza sin más
+patasola|¿Qué se debe hacer si se escucha a la Patasola?|No responder a la voz, permanecer acompañado y seguir el sendero conocido|Seguir la voz para ver quién llama|¿A quiénes se les aparece principalmente la Patasola?|A cazadores, leñadores y caminantes solos|A quienes van acompañados
+silbon|¿Cómo funciona el silbido del Silbón?|Si parece lejano, está cerca; y si parece cercano, está lejos|Si parece lejano, está lejos; y si parece cercano, está cerca|¿Qué busca el silbido del Silbón?|Que dudes de lo que oyes y de tu propio camino|Atraer a quien lo escucha hacia el río
+sombreron|¿Con qué está relacionada la aparición del Sombrerón?|Con la noche, el trasnocho, la persecución y los excesos|Con las actividades del día y los caminos del río|¿Qué se debe hacer si se siente al Sombrerón?|No correr y volver a casa por el camino conocido|Correr lo más rápido posible
+duende|¿Qué hace el Duende cuando alguien entra en su territorio?|Esconde objetos y habla con verdades a medias para ponerlos a prueba|Persigue y encierra a quienes ensucian su claro|¿Qué se debe hacer para que el Duende te guíe?|Escucharlo sin enojarte y no perder la calma|Ignorarlo y seguir caminando
+cazador|¿Cuál es la condena del Cazador?|Perseguir eternamente al mismo venado sin poder alcanzarlo|Cuidar el monte para siempre|¿Qué representa la historia del Cazador?|Las consecuencias de aquello que se hace sin respeto|El premio a quien caza con destreza

@@ -15,19 +15,19 @@ public class DiagnosticoVisual : MonoBehaviour
 
         string estado = "=== DIAGNÓSTICO VISUAL ===\n\n";
 
-        // Verificar SubtitulosZylo.Instance
-        if (SubtitulosZylo.Instance == null)
+        // Verificar SubtitulosMito.Instance
+        if (SubtitulosMito.Instance == null)
         {
-            estado += "SubtitulosZylo.Instance es NULL\n";
+            estado += "SubtitulosMito.Instance es NULL\n";
         }
         else
         {
-            estado += "SubtitulosZylo.Instance existe\n";
+            estado += "SubtitulosMito.Instance existe\n";
 
-            TextMeshProUGUI subtituloTexto = SubtitulosZylo.Instance.GetComponentInChildren<TextMeshProUGUI>();
+            TextMeshProUGUI subtituloTexto = SubtitulosMito.Instance.GetComponentInChildren<TextMeshProUGUI>();
 
             if (subtituloTexto == null)
-                estado += "No se encontró TextMeshProUGUI en SubtitulosZylo\n";
+                estado += "No se encontró TextMeshProUGUI en SubtitulosMito\n";
             else
                 estado += $"Texto subtítulos: '{subtituloTexto.text}'\n";
         }
