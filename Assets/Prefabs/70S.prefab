@@ -3577,7 +3577,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: idPin
-      value: madreagua
+      value: madre_de_agua
       objectReference: {fileID: 0}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: letrero
@@ -4407,7 +4407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: idPin
-      value: madre_de_agua
+      value: madremonte
       objectReference: {fileID: 0}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: letrero
