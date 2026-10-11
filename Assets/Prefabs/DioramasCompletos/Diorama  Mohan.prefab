@@ -796,7 +796,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.ProBuilder::UnityEngine.ProBuilder.ProBuilderMesh
   m_MeshFormatVersion: 2
   m_Faces:
-  - m_Indexes: 0d0000000b0000000c0000000d0000000a0000000b000000090000000a0000000d000000090000000d000000080000000f000000000000000e00000000000000010000000e0000000d0000000e0000000100000001000000080000000d000000010000000700000008000000010000000200000003000000030000000400000001000000050000000100000004000000050000000700000001000000050000000600000007000000
+  - m_Indexes: 0d0000000b0000000c0000000d0000000a0000000b000000090000000a0000000d000000090000000d000000080000000f000000000000000e00000000000000010000000e0000000d0000000e0000000100000001000000080000000d000000010000000700000008000000010000000200000003000000030000000400000001000000050000000100000004000000050000000700000001000000050000000600000007000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -814,22 +814,22 @@ MonoBehaviour:
     elementGroup: 0
     m_TextureGroup: -1
   m_SharedVertices:
-  - m_Vertices: 00000000
-  - m_Vertices: 01000000
-  - m_Vertices: 02000000
-  - m_Vertices: 03000000
-  - m_Vertices: 04000000
-  - m_Vertices: 05000000
-  - m_Vertices: 06000000
-  - m_Vertices: 07000000
-  - m_Vertices: 08000000
-  - m_Vertices: 09000000
-  - m_Vertices: 0a000000
-  - m_Vertices: 0b000000
-  - m_Vertices: 0c000000
-  - m_Vertices: 0d000000
-  - m_Vertices: 0e000000
-  - m_Vertices: 0f000000
+  - m_Vertices: 00000000i
+  - m_Vertices: 01000000i
+  - m_Vertices: 02000000i
+  - m_Vertices: 03000000i
+  - m_Vertices: 04000000i
+  - m_Vertices: 05000000i
+  - m_Vertices: 06000000i
+  - m_Vertices: 07000000i
+  - m_Vertices: 08000000i
+  - m_Vertices: 09000000i
+  - m_Vertices: 0a000000i
+  - m_Vertices: 0b000000i
+  - m_Vertices: 0c000000i
+  - m_Vertices: 0d000000i
+  - m_Vertices: 0e000000i
+  - m_Vertices: 0f000000i
   m_SharedTextures: []
   m_Positions:
   - {x: 2.5060103, y: 0.0000030815602, z: -1.3028462}
@@ -5879,7 +5879,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4e022a696fa603945889386be45217d6, type: 2}
+  - {fileID: 2100000, guid: cc47b07fa3e763b4b9a0c4e2e0428969, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
