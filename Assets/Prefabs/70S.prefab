@@ -685,7 +685,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 15cac6608b2412241ad8f3fe3782bce0, type: 2}
+  - {fileID: 2100000, guid: 145635fb22dc9044cb6b465f6be4166a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -978,7 +978,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 15cac6608b2412241ad8f3fe3782bce0, type: 2}
+  - {fileID: 2100000, guid: 1250d5df3c4f8044d8d8945facc17339, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1799,7 +1799,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d681f1a53fe45b3488dfd8cdf5e3da82, type: 2}
+  - {fileID: 2100000, guid: b91a8283e703eaf4ea0e592f4212e2eb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1912,7 +1912,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 15cac6608b2412241ad8f3fe3782bce0, type: 2}
+  - {fileID: 2100000, guid: 153bf81b1277baa489f8b13707fe8202, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3643,6 +3643,30 @@ PrefabInstance:
       propertyPath: 'objetosAR.Array.data[0]'
       value: 
       objectReference: {fileID: 7227878335671110231}
+    - target: {fileID: 6575834276579652018, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 145635fb22dc9044cb6b465f6be4166a, type: 2}
+    - target: {fileID: 7339968319026409633, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_Range
+      value: 1.2846085
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339968319026409633, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_Color.b
+      value: 0.24313726
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339968319026409633, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_Color.g
+      value: 0.6627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339968319026409633, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339968319026409633, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_Intensity
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8948850001108320288, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
     m_RemovedGameObjects: []
@@ -4083,6 +4107,22 @@ PrefabInstance:
       propertyPath: audioIntroduccionSiguienteEtapa
       value: 
       objectReference: {fileID: 8300000, guid: b92fe5ecb31b7594a908f04d907faf86, type: 3}
+    - target: {fileID: 6575834276579652018, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1250d5df3c4f8044d8d8945facc17339, type: 2}
+    - target: {fileID: 7339968319026409633, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339968319026409633, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_Color.g
+      value: 0.49803922
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339968319026409633, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_Color.r
+      value: 0.11764706
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8948850001108320288, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
     m_RemovedGameObjects: []
@@ -4534,6 +4574,26 @@ PrefabInstance:
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: preguntaInteractiva2.textoRespuesta
       value: "May Ackerman, quien gui\xF3 el inicio de \u201Cla universidad de la segunda oportunidad"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575834276579652018, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b91a8283e703eaf4ea0e592f4212e2eb, type: 2}
+    - target: {fileID: 6775065804761394773, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.00128
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339968319026409633, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_Color.b
+      value: 0.2784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339968319026409633, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_Color.g
+      value: 0.41960785
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339968319026409633, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_Color.r
+      value: 0.30980393
       objectReference: {fileID: 0}
     - target: {fileID: 8948850001108320288, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: m_Resource
@@ -4990,6 +5050,22 @@ PrefabInstance:
       propertyPath: audioIntroduccionSiguienteEtapa
       value: 
       objectReference: {fileID: 8300000, guid: a4a727361a4648a4e84a0f8305ec0ad2, type: 3}
+    - target: {fileID: 6575834276579652018, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 153bf81b1277baa489f8b13707fe8202, type: 2}
+    - target: {fileID: 7339968319026409633, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_Color.b
+      value: 0.22745098
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339968319026409633, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_Color.g
+      value: 0.3647059
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339968319026409633, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_Color.r
+      value: 0.23137255
+      objectReference: {fileID: 0}
     - target: {fileID: 8948850001108320288, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: m_Resource
       value: 
@@ -5218,6 +5294,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 769093768653021108}
     m_Modifications:
+    - target: {fileID: 107737681844299007, guid: f23164820f6e2e9479a6d5068cf7b07e, type: 3}
+      propertyPath: m_VersionIndex
+      value: 7016
+      objectReference: {fileID: 0}
     - target: {fileID: 3048432176265071264, guid: f23164820f6e2e9479a6d5068cf7b07e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.2
@@ -5338,6 +5418,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1778221282115318066}
     m_Modifications:
+    - target: {fileID: 104811627145580740, guid: f18f375c0557449488df801118483ae3, type: 3}
+      propertyPath: m_VersionIndex
+      value: 3457
+      objectReference: {fileID: 0}
     - target: {fileID: 3762423462734719075, guid: f18f375c0557449488df801118483ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.620004
@@ -5381,6 +5465,14 @@ PrefabInstance:
     - target: {fileID: 3959690233768979291, guid: f18f375c0557449488df801118483ae3, type: 3}
       propertyPath: m_Name
       value: Diorama  MadreAgua
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994940103547142777, guid: f18f375c0557449488df801118483ae3, type: 3}
+      propertyPath: m_VersionIndex
+      value: 15211
+      objectReference: {fileID: 0}
+    - target: {fileID: 4848258875683795275, guid: f18f375c0557449488df801118483ae3, type: 3}
+      propertyPath: m_VersionIndex
+      value: 599
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5501,6 +5593,26 @@ PrefabInstance:
     - target: {fileID: 5406890981998054109, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575834276579652018, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d681f1a53fe45b3488dfd8cdf5e3da82, type: 2}
+    - target: {fileID: 7339968319026409633, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339968319026409633, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339968319026409633, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339968319026409633, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_Intensity
+      value: 0.07
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}

@@ -54,8 +54,17 @@ public class ARPhotoManager : MonoBehaviour
                 btn.onClick.AddListener(() => OpenPhotoPreview(currentSlot.texture));
         }
 
+        // ✅ CAMBIO CLAVE: Ambos paneles empiezan apagados hasta que se desbloqueen
+        previewPanel.SetActive(false);
+        capturePanel.SetActive(false);
+    }
+
+    // ✅ NUEVO MÉTODO: Para que lo llame el botón desbloqueado
+    public void AbrirModoFoto()
+    {
         previewPanel.SetActive(false);
         capturePanel.SetActive(true);
+        Debug.Log("[ARPhotoManager] Modo de fotos abierto.");
     }
 
     // ============================================================
