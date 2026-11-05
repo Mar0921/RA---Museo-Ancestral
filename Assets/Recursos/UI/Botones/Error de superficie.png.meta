@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 33671fc117743d143979cbf8a70fd975
+guid: 03e805c403480d3498dd5f1652bad1ad
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -679975122879559351
-    second: Boton entendido_0
+      213: 7461379810918215841
+    second: Group 27_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -115,13 +115,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Boton entendido_0
+      name: Group 27_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1952
-        height: 528
+        width: 251
+        height: 43
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,8 +130,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 94949a87a3e3096f0800000000000000
-      internalID: -679975122879559351
+      spriteID: 1a03d0ce7652c8760800000000000000
+      internalID: 7461379810918215841
       vertices: []
       indices: 
       edges: []

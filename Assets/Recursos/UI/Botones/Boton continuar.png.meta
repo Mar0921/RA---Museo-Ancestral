@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d8f9c13fc1dc13141a96bbe92617d26c
+guid: dced4c278af16794cb6e82f5fe7dbd6d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1861346610138265077
-    second: Boton iniciar_0
+      213: -383722012086274818
+    second: "Bot\xF3n dorado \u201CCONTINUAR\u201D_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -115,13 +115,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Boton iniciar_0
+      name: "Bot\xF3n dorado \u201CCONTINUAR\u201D_0"
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1952
-        height: 528
+        width: 2172
+        height: 724
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,8 +130,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b0ac4d2be1b2b26e0800000000000000
-      internalID: -1861346610138265077
+      spriteID: ef47911fcdebcaaf0800000000000000
+      internalID: -383722012086274818
       vertices: []
       indices: 
       edges: []

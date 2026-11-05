@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 853aa7f1f93024042a8ce34fba36580e
+guid: eaffb8603ad171f499a14a240f6fcf0a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2921306379536908160
-    second: Pajaro guia_0
+      213: -2428010408532376600
+    second: "Ave M\xE1gica de Alas Doradas_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -115,13 +115,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Pajaro guia_0
+      name: "Ave M\xE1gica de Alas Doradas_0"
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1232
-        height: 832
+        width: 1526
+        height: 1031
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,8 +130,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 080ce97535f6577d0800000000000000
-      internalID: -2921306379536908160
+      spriteID: 8e30a78c569fd4ed0800000000000000
+      internalID: -2428010408532376600
       vertices: []
       indices: 
       edges: []
