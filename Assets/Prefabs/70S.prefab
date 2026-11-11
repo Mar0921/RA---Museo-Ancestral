@@ -444,8 +444,8 @@ Transform:
   m_GameObject: {fileID: 4310461502392532717}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: -0.026, y: 0.05, z: 0.6}
-  m_LocalScale: {x: 0.03668707, y: 0.2258102, z: 6.3661833}
+  m_LocalPosition: {x: -0.004, y: -0.007, z: 0.6}
+  m_LocalScale: {x: 0.044155017, y: 0.15196122, z: 4.2841864}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5950384419758267682}
@@ -575,7 +575,6 @@ Transform:
   - {fileID: 410248538056495191}
   - {fileID: 7080210260092269653}
   - {fileID: 5394663565356794015}
-  - {fileID: 4031218130168748559}
   m_Father: {fileID: 747188716313889509}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5139235234542190264
@@ -1344,7 +1343,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 004528940d0ebc64486c7d0046afd266, type: 3}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: textoDelPin
-      value: "En 1976, se celebraron los primeros grados del programa de Econom\xEDa, un acontecimiento hist\xF3rico que marc\xF3 el inicio de generaciones de profesionales aut\xF3nomos. Ese mismo a\xF1o, naci\xF3 la nueva imagen institucional, con el logo que representaba oficialmente a la UAO. Un a\xF1o despu\xE9s, en 1977, los estudiantes de ingenier\xEDa llevaron su orgullo a las calles: celebraron con un desfile su logro profesional, un momento registrado por la prensa local y recordado como s\xEDmbolo del esp\xEDritu Aut\xF3nomo."
+      value: "Antes de que llegaran los espa\xF1oles, entre\r\nlos pijaos, moh\xE1n no era un espanto:\r\n\r\nera un cargo.\r\n\r\nEl del sacerdote, el curandero,\r\nel que le\xEDa las se\xF1ales del agua.\r\n\r\nUna noche vio venir la Conquista y\r\nentendi\xF3 que no pod\xEDa detenerla.\r\n\r\nEntonces baj\xF3 a las cuevas del r\xEDo\r\ncon los tesoros que quer\xEDa cuidar,\r\n\r\ny all\xED se qued\xF3,\r\n\r\nhasta dejar de ser hombre para\r\nvolverse esp\xEDritu de r\xEDos y quebradas.\r\n\r\nHoy los pescadores lo conocen\r\nbien: juguet\xF3n, embaucador,\r\n\r\nde sonrisa p\xEDcara y sombrero de paja.\r\n\r\nPone trampas antes de ayudar.\r\n\r\nY les ense\xF1\xF3 a no pedirle al r\xEDo sin\r\ndar algo a cambio: un poco de tabaco,\r\n\r\naguardiente o sal.\r\n\r\nDicen que quien cruza su r\xEDo sin\r\ncantar, se queda a vivir en \xE9l.\r\n\r\nLos cronistas lo contaron cada vez\r\npeor, pero el Moh\xE1n sigue ah\xED,\r\n\r\nesperando que alguien recuerde\r\nsu verdadera historia."
       objectReference: {fileID: 0}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: audioRespuesta1
@@ -1359,13 +1358,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: b92fe5ecb31b7594a908f04d907faf86, type: 3}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: textoIntroduccion
+      value: "El r\xEDo suena distinto aqu\xED. Dejemos una ofrenda antes de cruzar."
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: objetosAR.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: audioRespuestaCorrecta
+      value: 
+      objectReference: {fileID: 8300000, guid: 0dff8bd81d0e82f4ba7f73fa119f64cb, type: 3}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: 'objetosAR.Array.data[0]'
       value: 
       objectReference: {fileID: 7227878335671110231}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: audioRespuestaIncorrecta
+      value: 
+      objectReference: {fileID: 8300000, guid: d0acc1e3990d22e4aabc46c1e41c745e, type: 3}
     - target: {fileID: 6575834276579652018, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1941,7 +1952,7 @@ PrefabInstance:
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: audioPin
       value: 
-      objectReference: {fileID: 8300000, guid: 338b2cd1182ae64498c8b9e82c6bea99, type: 3}
+      objectReference: {fileID: 8300000, guid: a7c8dde280604c44fb36248a23005244, type: 3}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: ordenPin
       value: 2
@@ -1952,7 +1963,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 338b2cd1182ae64498c8b9e82c6bea99, type: 3}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: textoDelPin
-      value: "En 1974, la universidad se traslad\xF3 al antiguo Colegio Champagnat, en pleno centro de Cali. Las antiguas aulas y la capilla se adaptaron como laboratorios, y el ICFES aprob\xF3 el programa de Econom\xEDa, el primero de car\xE1cter profesional. Delegados como Hugo Lora y Luis H. P\xE9rez participaron en seminarios internacionales, proyectando la visi\xF3n de una universidad moderna y conectada con el mundo. Para 1975, llegaron nuevas licencias de funcionamiento: Ingenier\xEDa Industrial, El\xE9ctrica y Mec\xE1nica."
+      value: "Donde nace una quebrada, donde un lago\r\nguarda silencio, hay quien cuida el agua.\r\n\r\nLos abuelos la llaman la Madre de\r\nAgua: una mujer de cabello largu\xEDsimo,\r\n\r\nm\xE1s bella de lo que conviene mirar,\r\n\r\nque aparece al amanecer o al caer\r\nla tarde pein\xE1ndose a la orilla.\r\n\r\nEs guardiana de los peces,\r\n\r\nde los nacimientos y de todo\r\nlo que se refleja en el agua.\r\n\r\nA quien la respeta le regala buena\r\npesca y le muestra el camino.\r\n\r\nA quien ensucia el r\xEDo o pesca\r\nde m\xE1s, se lo lleva al fondo,\r\n\r\ndonde el agua guarda lo\r\nque el mundo olvid\xF3.\r\n\r\nPor eso dec\xEDan que no se debe gritar junto\r\nal lago ni dejar basura en la orilla.\r\n\r\nElla no es buena ni mala: es\r\nel agua cuid\xE1ndose a s\xED misma.\r\n\r\nSi un d\xEDa la ves, no la sigas.\r\n\r\nM\xEDrala con respeto y deja el agua limpia."
       objectReference: {fileID: 0}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: audioRespuesta1
@@ -1965,11 +1976,19 @@ PrefabInstance:
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: introduccionPin
       value: 
-      objectReference: {fileID: 8300000, guid: a4a727361a4648a4e84a0f8305ec0ad2, type: 3}
+      objectReference: {fileID: 8300000, guid: 7ba43be256a550a4e8ca31848edb6ee4, type: 3}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: textoIntroduccion
+      value: Ese reflejo no es el nuestro. Vamos despacio.
+      objectReference: {fileID: 0}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: objetosAR.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: audioRespuestaCorrecta
+      value: 
+      objectReference: {fileID: 8300000, guid: 0e9b07970cbfe944684006d49c46c2c0, type: 3}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: 'objetosAR.Array.data[0]'
       value: 
@@ -1978,6 +1997,10 @@ PrefabInstance:
       propertyPath: 'objetosAR.Array.data[1]'
       value: 
       objectReference: {fileID: 1235020203370930799}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: audioRespuestaIncorrecta
+      value: 
+      objectReference: {fileID: 8300000, guid: 6856ad767fb37f44cbc13a5144945e19, type: 3}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: audioIntroduccionSiguienteEtapa
       value: 
@@ -3042,7 +3065,7 @@ PrefabInstance:
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: audioPin
       value: 
-      objectReference: {fileID: 8300000, guid: a7c8dde280604c44fb36248a23005244, type: 3}
+      objectReference: {fileID: 8300000, guid: 338b2cd1182ae64498c8b9e82c6bea99, type: 3}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: ordenPin
       value: 1
@@ -3053,7 +3076,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: a7c8dde280604c44fb36248a23005244, type: 3}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: textoDelPin
-      value: chao dani
+      value: "Dicen los campesinos que hay un claro en la\r\nmonta\xF1a adonde no se llega por casualidad.\r\n\r\nAll\xED manda una mujer corpulenta,\r\nvestida de hojas frescas y musgo,\r\n\r\ncon el rostro oculto bajo\r\nun sombrero de hojas.\r\n\r\nNadie ha visto su cara.\r\n\r\nEs la Madremonte, la due\xF1a\r\nde la selva, de los vientos,\r\n\r\nde las lluvias y de todo lo que crece.\r\n\r\nCuando alguien entra a talar, a\r\ncazar o a pescar sin respeto,\r\n\r\nella cierra los caminos.\r\n\r\nEl viento cambia,\r\n\r\nla niebla se espesa y el que se cre\xEDa due\xF1o del monte\r\nse pierde hasta perder la cuenta de sus propios pasos.\r\n\r\nNo castiga por gusto: cuida lo\r\nque otros solo saben gastar.\r\n\r\nSi te la encuentras,\r\nno corras ni discutas.\r\n\r\nAgradece el paso y devuelve el\r\nmonte tal como lo encontraste."
       objectReference: {fileID: 0}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: audioRespuesta1
@@ -3066,15 +3089,19 @@ PrefabInstance:
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: introduccionPin
       value: 
-      objectReference: {fileID: 8300000, guid: 7ba43be256a550a4e8ca31848edb6ee4, type: 3}
+      objectReference: {fileID: 8300000, guid: a4a727361a4648a4e84a0f8305ec0ad2, type: 3}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: textoIntroduccion
-      value: ola dani
+      value: "El monte se cierra y guarda silencio. Acerqu\xE9monos con respeto."
       objectReference: {fileID: 0}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: objetosAR.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: audioRespuestaCorrecta
+      value: 
+      objectReference: {fileID: 8300000, guid: 93e64670bc938e544a024421221d82c5, type: 3}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: 'objetosAR.Array.data[0]'
       value: 
@@ -3083,6 +3110,10 @@ PrefabInstance:
       propertyPath: 'objetosAR.Array.data[1]'
       value: 
       objectReference: {fileID: 8664811878770500532}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: audioRespuestaIncorrecta
+      value: 
+      objectReference: {fileID: 8300000, guid: a75d763910cf76d428d26fc4b464569d, type: 3}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: audioIntroduccionSiguienteEtapa
       value: 
@@ -3329,7 +3360,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 769093768653021108}
+    m_TransformParent: {fileID: 7080210260092269653}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 51031a4dbbb4ec3429835d8c6c711d7d, type: 3}
       propertyPath: m_LocalScale.x
@@ -3345,19 +3376,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 51031a4dbbb4ec3429835d8c6c711d7d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.51
+      value: -0.061308384
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 51031a4dbbb4ec3429835d8c6c711d7d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.21
+      value: 0.06999993
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 51031a4dbbb4ec3429835d8c6c711d7d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.3
+      value: 3.9356382
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 51031a4dbbb4ec3429835d8c6c711d7d, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.61378473
+      value: 0.998141
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 51031a4dbbb4ec3429835d8c6c711d7d, type: 3}
       propertyPath: m_LocalRotation.x
@@ -3365,7 +3396,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 51031a4dbbb4ec3429835d8c6c711d7d, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7894734
+      value: -0.060947984
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 51031a4dbbb4ec3429835d8c6c711d7d, type: 3}
       propertyPath: m_LocalRotation.z
@@ -3529,7 +3560,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3048432176265071264, guid: f23164820f6e2e9479a6d5068cf7b07e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4031218130168748559}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3188922767796712610, guid: f23164820f6e2e9479a6d5068cf7b07e, type: 3}
       insertIndex: -1
