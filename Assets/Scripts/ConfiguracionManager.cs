@@ -50,17 +50,6 @@ public class ConfiguracionManager : MonoBehaviour
     [SerializeField] private float logPeriodicoSeg = 0f;
     [SerializeField] private bool logToques = true;
 
-    [Header("=== Créditos ===")]
-    [TextArea(3, 10)]
-    [SerializeField]
-    private string creditos =
-        "Experiencia AR\n\n" +
-        "Desarrollado por:\n" +
-        "- Tu Nombre 1\n" +
-        "- Tu Nombre 2\n\n" +
-        "Universidad / Empresa\n" +
-        "Año";
-
     private bool muteado = false;
     private float volumenAnterior = 1f;
     private float timeScaleAnterior = 1f;
@@ -231,13 +220,6 @@ public class ConfiguracionManager : MonoBehaviour
         if (bloqueador != null) bloqueador.SetActive(false);
 
         ActualizarIconoMute();
-
-        if (panelCreditos != null)
-        {
-            TextMeshProUGUI texto = panelCreditos.GetComponentInChildren<TextMeshProUGUI>(true);
-            if (texto != null) texto.text = creditos;
-            else LogWarn("panelCreditos no tiene TextMeshProUGUI hijo");
-        }
 
         if (sliderVolumen != null)
         {
@@ -439,8 +421,6 @@ public class ConfiguracionManager : MonoBehaviour
     {
         Log(">>>>>> AbrirCreditos() <<<<<<");
 
-        // 🔥 AQUÍ ESTÁ EL CAMBIO: Se eliminó la línea que ocultaba el panelConfiguracion
-
         if (panelCreditos != null)
         {
             panelCreditos.SetActive(true);
@@ -454,7 +434,6 @@ public class ConfiguracionManager : MonoBehaviour
         Log(">>>>>> CerrarCreditos() <<<<<<");
         if (panelCreditos != null) panelCreditos.SetActive(false);
 
-        // Nos aseguramos de que la configuración vuelva a quedar al frente al cerrar créditos
         if (panelConfiguracion != null)
         {
             AplicarOrden(panelConfiguracion, ordenBase + 1);
