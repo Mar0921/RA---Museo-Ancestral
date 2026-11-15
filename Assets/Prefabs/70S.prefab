@@ -1057,6 +1057,7 @@ Transform:
   - {fileID: 8107669643995152514}
   - {fileID: 1778221282115318066}
   - {fileID: 769093768653021108}
+  - {fileID: 5415733523488170838}
   - {fileID: 7242327287687550395}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1091,6 +1092,41 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4297826427292315609}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8048187751446438850
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5415733523488170838}
+  m_Layer: 0
+  m_Name: Duende
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5415733523488170838
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8048187751446438850}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.99125177, z: -0, w: 0.13198462}
+  m_LocalPosition: {x: 3.77, y: 2.1507, z: 56.41}
+  m_LocalScale: {x: 0.93813, y: 0.93813, z: 0.93813}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8178260310300185438}
+  - {fileID: 125229641865254373}
+  - {fileID: 1697082214355051211}
+  - {fileID: 101699639750539752}
+  m_Father: {fileID: 747188716313889509}
+  m_LocalEulerAnglesHint: {x: 0, y: 164.831, z: 0}
 --- !u!1 &8055315649113378561
 GameObject:
   m_ObjectHideFlags: 0
@@ -1346,6 +1382,14 @@ PrefabInstance:
       value: "Antes de que llegaran los espa\xF1oles, entre\r\nlos pijaos, moh\xE1n no era un espanto:\r\n\r\nera un cargo.\r\n\r\nEl del sacerdote, el curandero,\r\nel que le\xEDa las se\xF1ales del agua.\r\n\r\nUna noche vio venir la Conquista y\r\nentendi\xF3 que no pod\xEDa detenerla.\r\n\r\nEntonces baj\xF3 a las cuevas del r\xEDo\r\ncon los tesoros que quer\xEDa cuidar,\r\n\r\ny all\xED se qued\xF3,\r\n\r\nhasta dejar de ser hombre para\r\nvolverse esp\xEDritu de r\xEDos y quebradas.\r\n\r\nHoy los pescadores lo conocen\r\nbien: juguet\xF3n, embaucador,\r\n\r\nde sonrisa p\xEDcara y sombrero de paja.\r\n\r\nPone trampas antes de ayudar.\r\n\r\nY les ense\xF1\xF3 a no pedirle al r\xEDo sin\r\ndar algo a cambio: un poco de tabaco,\r\n\r\naguardiente o sal.\r\n\r\nDicen que quien cruza su r\xEDo sin\r\ncantar, se queda a vivir en \xE9l.\r\n\r\nLos cronistas lo contaron cada vez\r\npeor, pero el Moh\xE1n sigue ah\xED,\r\n\r\nesperando que alguien recuerde\r\nsu verdadera historia."
       objectReference: {fileID: 0}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: tituloObjeto
+      value: "Anzuelo P\xEDcaro"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: objetoDetalle
+      value: 
+      objectReference: {fileID: 7505299716509459982, guid: 100a2f2310ae10e47a5953a296ffbdd5, type: 3}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: audioRespuesta1
       value: 
       objectReference: {fileID: 8300000, guid: f85a64544b267254dafad8879236a29b, type: 3}
@@ -1363,7 +1407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: objetosAR.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: audioRespuestaCorrecta
@@ -1373,6 +1417,10 @@ PrefabInstance:
       propertyPath: 'objetosAR.Array.data[0]'
       value: 
       objectReference: {fileID: 7227878335671110231}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: 'objetosAR.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1079366872719903469}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: audioRespuestaIncorrecta
       value: 
@@ -1691,6 +1739,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 438881058071131621, guid: 1e09efc1978a0f245b19b4027fa56742, type: 3}
   m_PrefabInstance: {fileID: 262978030312433074}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1079366872719903469 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 962898766808641375, guid: 1e09efc1978a0f245b19b4027fa56742, type: 3}
+  m_PrefabInstance: {fileID: 262978030312433074}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &945770186382096430
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1768,6 +1821,85 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8682276243108517918, guid: 98891f270a5b2aa44aa94efa6261ff53, type: 3}
   m_PrefabInstance: {fileID: 945770186382096430}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9085581702252608138 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8301951135849874084, guid: 98891f270a5b2aa44aa94efa6261ff53, type: 3}
+  m_PrefabInstance: {fileID: 945770186382096430}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1155039392507184416
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5415733523488170838}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 46226c4eefbbcc943ac4d9288a42fa18, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.1319005
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46226c4eefbbcc943ac4d9288a42fa18, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.971697
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46226c4eefbbcc943ac4d9288a42fa18, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.1319005
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46226c4eefbbcc943ac4d9288a42fa18, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.3272141
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46226c4eefbbcc943ac4d9288a42fa18, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.1799433
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46226c4eefbbcc943ac4d9288a42fa18, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.2373164
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46226c4eefbbcc943ac4d9288a42fa18, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.6132928
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46226c4eefbbcc943ac4d9288a42fa18, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46226c4eefbbcc943ac4d9288a42fa18, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.78985566
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46226c4eefbbcc943ac4d9288a42fa18, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46226c4eefbbcc943ac4d9288a42fa18, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46226c4eefbbcc943ac4d9288a42fa18, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90.825
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46226c4eefbbcc943ac4d9288a42fa18, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46226c4eefbbcc943ac4d9288a42fa18, type: 3}
+      propertyPath: m_Name
+      value: Duende
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 46226c4eefbbcc943ac4d9288a42fa18, type: 3}
+--- !u!4 &1697082214355051211 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 46226c4eefbbcc943ac4d9288a42fa18, type: 3}
+  m_PrefabInstance: {fileID: 1155039392507184416}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1266587433386994708
 PrefabInstance:
@@ -1966,6 +2098,14 @@ PrefabInstance:
       value: "Donde nace una quebrada, donde un lago\r\nguarda silencio, hay quien cuida el agua.\r\n\r\nLos abuelos la llaman la Madre de\r\nAgua: una mujer de cabello largu\xEDsimo,\r\n\r\nm\xE1s bella de lo que conviene mirar,\r\n\r\nque aparece al amanecer o al caer\r\nla tarde pein\xE1ndose a la orilla.\r\n\r\nEs guardiana de los peces,\r\n\r\nde los nacimientos y de todo\r\nlo que se refleja en el agua.\r\n\r\nA quien la respeta le regala buena\r\npesca y le muestra el camino.\r\n\r\nA quien ensucia el r\xEDo o pesca\r\nde m\xE1s, se lo lleva al fondo,\r\n\r\ndonde el agua guarda lo\r\nque el mundo olvid\xF3.\r\n\r\nPor eso dec\xEDan que no se debe gritar junto\r\nal lago ni dejar basura en la orilla.\r\n\r\nElla no es buena ni mala: es\r\nel agua cuid\xE1ndose a s\xED misma.\r\n\r\nSi un d\xEDa la ves, no la sigas.\r\n\r\nM\xEDrala con respeto y deja el agua limpia."
       objectReference: {fileID: 0}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: tituloObjeto
+      value: Agua Vital
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: objetoDetalle
+      value: 
+      objectReference: {fileID: 7449308609528533966, guid: f2397acb8990ce045937703491d7f639, type: 3}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: audioRespuesta1
       value: 
       objectReference: {fileID: 8300000, guid: 11cb61e7583ce2f44a847794230ae8fa, type: 3}
@@ -1983,7 +2123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: objetosAR.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: audioRespuestaCorrecta
@@ -1997,6 +2137,10 @@ PrefabInstance:
       propertyPath: 'objetosAR.Array.data[1]'
       value: 
       objectReference: {fileID: 1235020203370930799}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: 'objetosAR.Array.data[2]'
+      value: 
+      objectReference: {fileID: 3642364520239443957}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: audioRespuestaIncorrecta
       value: 
@@ -2385,6 +2529,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56831da1aa2fe5e42a003a26aae49d2e, type: 3}
+--- !u!1 &6315127011450241400 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5209184565735430840, guid: 56831da1aa2fe5e42a003a26aae49d2e, type: 3}
+  m_PrefabInstance: {fileID: 2299487065603890112}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6694607590498180034 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4828260602259161090, guid: 56831da1aa2fe5e42a003a26aae49d2e, type: 3}
@@ -2566,6 +2715,14 @@ PrefabInstance:
       value: "Dicen los abuelos que el monte tiene due\xF1o, y que ese due\xF1o no se ve, se escucha.\r\n\r\nCuando un cazador entra al bosque buscando presa f\xE1cil, el aire cambia.\r\n\r\nLas hojas se agitan sin que sople el viento, y un crujido de ramas secas empieza a moverse entre los \xE1rboles, siempre un paso adelante, siempre un paso atr\xE1s.\r\n\r\nEs el Hojarasqu\xEDn del Monte.\r\n\r\nNaci\xF3 de la plegaria de quienes quer\xEDan proteger a los venados y a las dantas de quien solo busca matar por matar.\r\n\r\nNo tiene forma fija: es hojas, y ramas, es el propio bosque tomando cuerpo para cuidarse a s\xED mismo.\r\n\r\nNo ataca. Juega.\r\n\r\nDesordena caminos, invierte huellas, susurra donde no hay nadie, hasta que el intruso pierde el rumbo\r\ny con \xE9l, las ganas de seguir cazando.\r\n\r\nSi entras a su territorio con respeto, te deja pasar.\r\n\r\nSi entras a lastimarlo, te vas a perder en la espesura, dando vueltas sobre tus propios pasos, hasta que aprendas que este monte tiene quien lo cuide.\r\n"
       objectReference: {fileID: 0}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: tituloObjeto
+      value: Roca Del Monte
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: objetoDetalle
+      value: 
+      objectReference: {fileID: 2305847322899550817, guid: df85876062f627c4f9a43e64071e3978, type: 3}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: audioRespuesta1
       value: 
       objectReference: {fileID: 8300000, guid: 3f913b58b094c224bb6de46e27fda7d5, type: 3}
@@ -2585,7 +2742,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: objetosAR.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: audioRespuestaCorrecta
@@ -2599,6 +2756,10 @@ PrefabInstance:
       propertyPath: 'objetosAR.Array.data[1]'
       value: 
       objectReference: {fileID: 2890792772270046300}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: 'objetosAR.Array.data[2]'
+      value: 
+      objectReference: {fileID: 9085581702252608138}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: audioRespuestaIncorrecta
       value: 
@@ -3079,6 +3240,14 @@ PrefabInstance:
       value: "Dicen los campesinos que hay un claro en la\r\nmonta\xF1a adonde no se llega por casualidad.\r\n\r\nAll\xED manda una mujer corpulenta,\r\nvestida de hojas frescas y musgo,\r\n\r\ncon el rostro oculto bajo\r\nun sombrero de hojas.\r\n\r\nNadie ha visto su cara.\r\n\r\nEs la Madremonte, la due\xF1a\r\nde la selva, de los vientos,\r\n\r\nde las lluvias y de todo lo que crece.\r\n\r\nCuando alguien entra a talar, a\r\ncazar o a pescar sin respeto,\r\n\r\nella cierra los caminos.\r\n\r\nEl viento cambia,\r\n\r\nla niebla se espesa y el que se cre\xEDa due\xF1o del monte\r\nse pierde hasta perder la cuenta de sus propios pasos.\r\n\r\nNo castiga por gusto: cuida lo\r\nque otros solo saben gastar.\r\n\r\nSi te la encuentras,\r\nno corras ni discutas.\r\n\r\nAgradece el paso y devuelve el\r\nmonte tal como lo encontraste."
       objectReference: {fileID: 0}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: tituloObjeto
+      value: Hoja Primigenia
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: objetoDetalle
+      value: 
+      objectReference: {fileID: 4547335632310367072, guid: f3ca3608e3d53d54298c2e31965cad81, type: 3}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: audioRespuesta1
       value: 
       objectReference: {fileID: 8300000, guid: de104bfd152493e48bcf778c54016e4c, type: 3}
@@ -3096,7 +3265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: objetosAR.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: audioRespuestaCorrecta
@@ -3110,6 +3279,10 @@ PrefabInstance:
       propertyPath: 'objetosAR.Array.data[1]'
       value: 
       objectReference: {fileID: 8664811878770500532}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: 'objetosAR.Array.data[2]'
+      value: 
+      objectReference: {fileID: 6315127011450241400}
     - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
       propertyPath: audioRespuestaIncorrecta
       value: 
@@ -3428,6 +3601,445 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 51031a4dbbb4ec3429835d8c6c711d7d, type: 3}
   m_PrefabInstance: {fileID: 3493521152438959588}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4049877871324277691
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5415733523488170838}
+    m_Modifications:
+    - target: {fileID: 3609232213814692073, guid: e869c5a8dc7cbb844b6bc7030bb2900f, type: 3}
+      propertyPath: m_Name
+      value: Placa_Duende
+      objectReference: {fileID: 0}
+    - target: {fileID: 4133531775775412819, guid: e869c5a8dc7cbb844b6bc7030bb2900f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 15.142337
+      objectReference: {fileID: 0}
+    - target: {fileID: 4133531775775412819, guid: e869c5a8dc7cbb844b6bc7030bb2900f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 15.142337
+      objectReference: {fileID: 0}
+    - target: {fileID: 4133531775775412819, guid: e869c5a8dc7cbb844b6bc7030bb2900f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 15.142337
+      objectReference: {fileID: 0}
+    - target: {fileID: 4133531775775412819, guid: e869c5a8dc7cbb844b6bc7030bb2900f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.0662775
+      objectReference: {fileID: 0}
+    - target: {fileID: 4133531775775412819, guid: e869c5a8dc7cbb844b6bc7030bb2900f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.4083014
+      objectReference: {fileID: 0}
+    - target: {fileID: 4133531775775412819, guid: e869c5a8dc7cbb844b6bc7030bb2900f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.8474758
+      objectReference: {fileID: 0}
+    - target: {fileID: 4133531775775412819, guid: e869c5a8dc7cbb844b6bc7030bb2900f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.60759366
+      objectReference: {fileID: 0}
+    - target: {fileID: 4133531775775412819, guid: e869c5a8dc7cbb844b6bc7030bb2900f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4133531775775412819, guid: e869c5a8dc7cbb844b6bc7030bb2900f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7942481
+      objectReference: {fileID: 0}
+    - target: {fileID: 4133531775775412819, guid: e869c5a8dc7cbb844b6bc7030bb2900f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4133531775775412819, guid: e869c5a8dc7cbb844b6bc7030bb2900f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4133531775775412819, guid: e869c5a8dc7cbb844b6bc7030bb2900f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 4133531775775412819, guid: e869c5a8dc7cbb844b6bc7030bb2900f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e869c5a8dc7cbb844b6bc7030bb2900f, type: 3}
+--- !u!4 &101699639750539752 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4133531775775412819, guid: e869c5a8dc7cbb844b6bc7030bb2900f, type: 3}
+  m_PrefabInstance: {fileID: 4049877871324277691}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &730321891451855698 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3609232213814692073, guid: e869c5a8dc7cbb844b6bc7030bb2900f, type: 3}
+  m_PrefabInstance: {fileID: 4049877871324277691}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4212597242908875139
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5415733523488170838}
+    m_Modifications:
+    - target: {fileID: 3691545734623076337, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: 0ee79ab633940a04fadc0afd340ee779, type: 3}
+    - target: {fileID: 4630529582317015143, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_Name
+      value: Pin Mapa 70s Variant (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5406890981998054109, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5406890981998054109, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 5406890981998054109, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 5406890981998054109, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: 5406890981998054109, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5406890981998054109, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5406890981998054109, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5406890981998054109, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5406890981998054109, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5406890981998054109, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: idPin
+      value: duende
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: audioPin
+      value: 
+      objectReference: {fileID: 8300000, guid: 3d8d7040d7ae7f642b8a0362a2b00055, type: 3}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: ordenPin
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 004528940d0ebc64486c7d0046afd266, type: 3}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: textoDelPin
+      value: "Si en la casa o en el monte empiezan a\r\nfaltar cosas, la linterna, las llaves,\r\n\r\nel machete, no siempre fue descuido.\r\n\r\nPuede que el Duende ande cerca.\r\n\r\nEs peque\xF1o, de sombrero\r\ngrande y sonrisa traviesa,\r\n\r\ny a veces lleva un tiple en la mano.\r\n\r\nCuando toca, su melod\xEDa\r\natrae o desorienta.\r\n\r\nLe encanta enga\xF1ar con verdades a medias,\r\n\r\nesconder lo que uno m\xE1s necesita\r\ny ver qu\xE9 hace el desprevenido.\r\n\r\nPero detr\xE1s de la risa\r\nhay una tristeza vieja,\r\n\r\nla de quien vive en un lugar\r\nque ya casi nadie respeta.\r\n\r\nEs el due\xF1o del claro, y quien ensucia\r\nsu casa tarde o temprano lo escucha.\r\n\r\nHabla, pregunta, se burla.\r\n\r\nY si aprendes a o\xEDrlo sin\r\nenojarte, termina siendo gu\xEDa:\r\n\r\nte lleva hasta donde alguien\r\nm\xE1s grande te est\xE1 esperando.\r\n\r\nCon el Duende, lo primero\r\nes no perder la calma."
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: tituloObjeto
+      value: "Llave Mel\xF3dica"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: objetoDetalle
+      value: 
+      objectReference: {fileID: 5212916959866523616, guid: 642586ef018063f4b96ddb88c7b2c43a, type: 3}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: audioRespuesta1
+      value: 
+      objectReference: {fileID: 8300000, guid: f85a64544b267254dafad8879236a29b, type: 3}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: audioRespuesta2
+      value: 
+      objectReference: {fileID: 8300000, guid: 03d3ec136021c6f48ab1108fc5bf0d44, type: 3}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: introduccionPin
+      value: 
+      objectReference: {fileID: 8300000, guid: 521062a1001434348940e0b98babefea, type: 3}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: textoIntroduccion
+      value: "\xBFFaltan cosas? Tranquilos, sigamos con m\xFAsica."
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: objetosAR.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: audioRespuestaCorrecta
+      value: 
+      objectReference: {fileID: 8300000, guid: b97072e8025048445bb1e7226e663eb5, type: 3}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: 'objetosAR.Array.data[0]'
+      value: 
+      objectReference: {fileID: 4179421130828027005}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: 'objetosAR.Array.data[1]'
+      value: 
+      objectReference: {fileID: 730321891451855698}
+    - target: {fileID: 5595221159592902849, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: audioRespuestaIncorrecta
+      value: 
+      objectReference: {fileID: 8300000, guid: 0a6af11ab07e4c042a212d75517fbecb, type: 3}
+    - target: {fileID: 6575834276579652018, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 88601f16147ffcb449f0254438eae54d, type: 2}
+    - target: {fileID: 7339968319026409633, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_Range
+      value: 1.2846085
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339968319026409633, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_Color.b
+      value: 0.24313726
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339968319026409633, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_Color.g
+      value: 0.6627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339968319026409633, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339968319026409633, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      propertyPath: m_Intensity
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8948850001108320288, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4630529582317015143, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7540075262479090560}
+    - targetCorrespondingSourceObject: {fileID: 4630529582317015143, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7294049150509478930}
+  m_SourcePrefab: {fileID: 100100000, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+--- !u!4 &8178260310300185438 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5406890981998054109, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+  m_PrefabInstance: {fileID: 4212597242908875139}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8805897095177177572 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4630529582317015143, guid: 1c4da1def26f25e48985b1f9fe3737a8, type: 3}
+  m_PrefabInstance: {fileID: 4212597242908875139}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &7540075262479090560
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8805897095177177572}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: f85a64544b267254dafad8879236a29b, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &7294049150509478930
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8805897095177177572}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 03d3ec136021c6f48ab1108fc5bf0d44, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &4928793884969694843
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3497,6 +4109,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 798cd147cf1e7cd4da4f275c6c0a81f9, type: 3}
+--- !u!1 &3642364520239443957 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8568890862994971022, guid: 798cd147cf1e7cd4da4f275c6c0a81f9, type: 3}
+  m_PrefabInstance: {fileID: 4928793884969694843}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4163463056160716111 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9052517256912143156, guid: 798cd147cf1e7cd4da4f275c6c0a81f9, type: 3}
@@ -3761,6 +4378,89 @@ MonoBehaviour:
   volumen: 1
   ignorarUI: 1
   umbralArrastre: 10
+--- !u!1001 &6445039771325655756
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5415733523488170838}
+    m_Modifications:
+    - target: {fileID: 312951550714092153, guid: a009be5037491b34ea52aa0ff8de6dd0, type: 3}
+      propertyPath: m_Name
+      value: Pin Mapa 70s Variant (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6398918204728229673, guid: a009be5037491b34ea52aa0ff8de6dd0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.0659504
+      objectReference: {fileID: 0}
+    - target: {fileID: 6398918204728229673, guid: a009be5037491b34ea52aa0ff8de6dd0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.0659504
+      objectReference: {fileID: 0}
+    - target: {fileID: 6398918204728229673, guid: a009be5037491b34ea52aa0ff8de6dd0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.0659504
+      objectReference: {fileID: 0}
+    - target: {fileID: 6398918204728229673, guid: a009be5037491b34ea52aa0ff8de6dd0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.1582394
+      objectReference: {fileID: 0}
+    - target: {fileID: 6398918204728229673, guid: a009be5037491b34ea52aa0ff8de6dd0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.2714922
+      objectReference: {fileID: 0}
+    - target: {fileID: 6398918204728229673, guid: a009be5037491b34ea52aa0ff8de6dd0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.3421905
+      objectReference: {fileID: 0}
+    - target: {fileID: 6398918204728229673, guid: a009be5037491b34ea52aa0ff8de6dd0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6195844
+      objectReference: {fileID: 0}
+    - target: {fileID: 6398918204728229673, guid: a009be5037491b34ea52aa0ff8de6dd0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6398918204728229673, guid: a009be5037491b34ea52aa0ff8de6dd0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7849301
+      objectReference: {fileID: 0}
+    - target: {fileID: 6398918204728229673, guid: a009be5037491b34ea52aa0ff8de6dd0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6398918204728229673, guid: a009be5037491b34ea52aa0ff8de6dd0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6398918204728229673, guid: a009be5037491b34ea52aa0ff8de6dd0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -92.269
+      objectReference: {fileID: 0}
+    - target: {fileID: 6398918204728229673, guid: a009be5037491b34ea52aa0ff8de6dd0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165553397429796529, guid: a009be5037491b34ea52aa0ff8de6dd0, type: 3}
+      propertyPath: m_Name
+      value: Diorama Duende
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a009be5037491b34ea52aa0ff8de6dd0, type: 3}
+--- !u!4 &125229641865254373 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6398918204728229673, guid: a009be5037491b34ea52aa0ff8de6dd0, type: 3}
+  m_PrefabInstance: {fileID: 6445039771325655756}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4179421130828027005 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7165553397429796529, guid: a009be5037491b34ea52aa0ff8de6dd0, type: 3}
+  m_PrefabInstance: {fileID: 6445039771325655756}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7232392026607250576
 PrefabInstance:
   m_ObjectHideFlags: 0

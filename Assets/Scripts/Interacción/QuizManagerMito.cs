@@ -182,22 +182,25 @@ public class QuizManagerMito : MonoBehaviour
         if (botonRespuestaA != null) botonRespuestaA.interactable = false;
         if (botonRespuestaB != null) botonRespuestaB.interactable = false;
 
+        // Referencia local: pinActual puede anularse si algo llama a Cerrar()
+        PinMapa pin = pinActual;
+
         // ============================================================
         // DATOS DE RESPUESTA
         // ============================================================
-        DatosRespuesta datosResp = LectorRespuestas.instance?.ObtenerDatosPorID(pinActual.idPin);
+        DatosRespuesta datosResp = LectorRespuestas.instance?.ObtenerDatosPorID(pin.idPin);
         string textoRespuesta = null;
         AudioClip audioRespuesta = null;
 
         if (correcto)
         {
             if (datosResp != null) textoRespuesta = datosResp.respuesta1;
-            if (pinActual != null) audioRespuesta = pinActual.AudioRespuestaCorrecta;
+            audioRespuesta = pin.AudioRespuestaCorrecta;
         }
         else
         {
             if (datosResp != null) textoRespuesta = datosResp.respuesta2;
-            if (pinActual != null) audioRespuesta = pinActual.AudioRespuestaIncorrecta;
+            audioRespuesta = pin.AudioRespuestaIncorrecta;
         }
 
         // ============================================================
@@ -205,7 +208,7 @@ public class QuizManagerMito : MonoBehaviour
         // ============================================================
         Debug.Log("========== [QuizManagerMito] DIAGNÓSTICO RESPUESTA ==========");
         Debug.Log($"[QuizManagerMito] Correcto? {correcto}");
-        Debug.Log($"[QuizManagerMito] pinActual: {(pinActual != null ? pinActual.idPin : "NULL")}");
+        Debug.Log($"[QuizManagerMito] pinActual: {pin.idPin}");
         Debug.Log($"[QuizManagerMito] datosResp es null? {datosResp == null}");
         Debug.Log($"[QuizManagerMito] textoRespuesta: '{textoRespuesta}'");
         Debug.Log($"[QuizManagerMito] audioRespuesta es null? {audioRespuesta == null}");
@@ -224,8 +227,10 @@ public class QuizManagerMito : MonoBehaviour
         Debug.Log("========== FIN DIAGNÓSTICO ==========");
 
         // ============================================================
-        // REPRODUCIR AUDIO + SUBTÍTULOS
+        // REPRODUCIR AUDIO + SUBTÍTULOS (con botón Saltar)
         // ============================================================
+        var skip = BotonSaltarNarracion.Instance;
+
         if (audioRespuesta != null && audioSource != null)
         {
             Debug.Log($"[QuizManagerMito] 🔊 Reproduciendo: {audioRespuesta.name}");
@@ -233,15 +238,28 @@ public class QuizManagerMito : MonoBehaviour
             if (!string.IsNullOrEmpty(textoRespuesta) && SubtitulosMito.Instance != null)
                 SubtitulosMito.Instance.MostrarSubtitulosConAudio(textoRespuesta, audioRespuesta);
 
+            skip?.Activar();
             audioSource.PlayOneShot(audioRespuesta);
-            Debug.Log($"[QuizManagerMito] audioSource.isPlaying después de PlayOneShot: {audioSource.isPlaying}");
-            yield return new WaitForSeconds(audioRespuesta.length);
+            yield return EsperarConSalto(audioRespuesta.length, skip);
+
+            if (skip != null && skip.SaltoSolicitado)
+            {
+                audioSource.Stop();
+                SubtitulosMito.Instance?.DetenerYLimpiar();
+            }
+            skip?.Desactivar();
         }
         else if (!string.IsNullOrEmpty(textoRespuesta) && SubtitulosMito.Instance != null)
         {
             Debug.LogWarning("[QuizManagerMito] ⚠️ No hay audio, mostrando solo texto.");
             SubtitulosMito.Instance.MostrarTexto(textoRespuesta);
-            yield return new WaitForSeconds(3f);
+
+            skip?.Activar();
+            yield return EsperarConSalto(3f, skip);
+
+            if (skip != null && skip.SaltoSolicitado)
+                SubtitulosMito.Instance?.DetenerYLimpiar();
+            skip?.Desactivar();
         }
         else
         {
@@ -259,43 +277,68 @@ public class QuizManagerMito : MonoBehaviour
         // ============================================================
         if (correcto)
         {
+            // 1) Felicitación + insignia
             if (panelFelicitaciones != null) panelFelicitaciones.SetActive(true);
             if (animacionInsignia != null) animacionInsignia.SetActive(true);
 
-            InsigniasManager.Instance?.OtorgarInsignia(pinActual.idPin);
+            InsigniasManager.Instance?.OtorgarInsignia(pin.idPin);
 
             yield return new WaitForSeconds(duracionFeedback);
 
             if (panelFelicitaciones != null) panelFelicitaciones.SetActive(false);
             if (animacionInsignia != null) animacionInsignia.SetActive(false);
 
+            // 2) Objeto del mito en detalle (rotar / zoom / cerrar)
+            if (pin.ObjetoDetalle != null)
+            {
+                if (VisorObjetoDetalle.Instance != null)
+                {
+                    yield return VisorObjetoDetalle.Instance.MostrarYEsperar(
+                        pin.ObjetoDetalle, pin.TituloObjeto, pin.DescripcionObjeto);
+                }
+                else
+                {
+                    Debug.LogWarning("[QuizManagerMito] ⚠️ Hay objeto de detalle pero no existe VisorObjetoDetalle en la escena.");
+                }
+            }
+
+            // 3) Continuar con los demás pines
             var manager = FindFirstObjectByType<PlaneManager>();
-            manager?.NotificarPinCompletado(pinActual);
+            manager?.NotificarPinCompletado(pin);
 
             Cerrar();
         }
         else
         {
+            if (panelIncorrecto != null) panelIncorrecto.SetActive(true);
+            yield return new WaitForSeconds(duracionFeedback);
+            if (panelIncorrecto != null) panelIncorrecto.SetActive(false);
+
             if (oportunidad == 1)
             {
-                if (panelIncorrecto != null) panelIncorrecto.SetActive(true);
-                yield return new WaitForSeconds(duracionFeedback);
-                if (panelIncorrecto != null) panelIncorrecto.SetActive(false);
-
                 oportunidad = 2;
                 StartCoroutine(SecuenciaPregunta());
             }
             else
             {
-                if (panelIncorrecto != null) panelIncorrecto.SetActive(true);
-                yield return new WaitForSeconds(duracionFeedback);
-                if (panelIncorrecto != null) panelIncorrecto.SetActive(false);
-
                 RepetirPin();
             }
         }
+    }
 
-        esperandoRespuesta = false;
+    /// <summary>
+    /// Espera 'segundos' con tiempo ESCALADO (se congela si el menú pone timeScale = 0,
+    /// igual que el audio pausado), o hasta que se presione "Saltar".
+    /// </summary>
+    private IEnumerator EsperarConSalto(float segundos, BotonSaltarNarracion skip)
+    {
+        float t = 0f;
+        while (t < segundos)
+        {
+            if (skip != null && skip.SaltoSolicitado) yield break;
+            t += Time.deltaTime;
+            yield return null;
+        }
     }
 
     private void RepetirPin()
@@ -312,6 +355,9 @@ public class QuizManagerMito : MonoBehaviour
     {
         StopAllCoroutines();
         esperandoRespuesta = false;
+
+        BotonSaltarNarracion.Instance?.Desactivar();
+        VisorObjetoDetalle.Instance?.ForzarCierre();
 
         if (panelPreguntas != null) panelPreguntas.SetActive(false);
         if (panelFelicitaciones != null) panelFelicitaciones.SetActive(false);
