@@ -22,8 +22,11 @@ public class InsigniasManager : MonoBehaviour
     public UnityEngine.Events.UnityEvent OnTodasLasInsigniasObtenidas;
 
     private int totalPinesEnEscena = 0;
+    private bool eventoDisparado = false;
 
-    public int TotalPines => totalPinesEnEscena;
+    // El objetivo real son los slots; si no hay slots se usa el conteo de pines.
+    public int TotalPines => slots.Count > 0 ? slots.Count : totalPinesEnEscena;
+
     public int PinesCompletados
     {
         get
@@ -34,7 +37,7 @@ public class InsigniasManager : MonoBehaviour
         }
     }
 
-    public bool TodasCompletadas => PinesCompletados >= totalPinesEnEscena && totalPinesEnEscena > 0;
+    public bool TodasCompletadas => TotalPines > 0 && PinesCompletados >= TotalPines;
 
     void Awake()
     {
@@ -47,11 +50,11 @@ public class InsigniasManager : MonoBehaviour
         InicializarSlots();
     }
 
-    /// <summary>
-    /// Deja todos los slots con su ícono bloqueado y sin activo.
-    /// </summary>
+    /// <summary>Deja todos los slots con su ícono bloqueado y sin activo.</summary>
     private void InicializarSlots()
     {
+        eventoDisparado = false;
+
         foreach (var s in slots)
         {
             s.desbloqueada = false;
@@ -69,19 +72,15 @@ public class InsigniasManager : MonoBehaviour
         Debug.Log($"[InsigniasManager] Slots inicializados: {slots.Count}");
     }
 
-    /// <summary>
-    /// Cuenta dinámicamente todos los PinMapa de la escena.
-    /// </summary>
+    /// <summary>Solo informativo; ya no es necesario para desbloquear la recompensa.</summary>
     public void CalcularTotalPines()
     {
         PinMapa[] todos = FindObjectsByType<PinMapa>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         totalPinesEnEscena = todos.Length;
-        Debug.Log($"[InsigniasManager] Total de pines detectados: {totalPinesEnEscena}");
+        Debug.Log($"[InsigniasManager] Pines en escena: {totalPinesEnEscena} | Slots: {slots.Count}");
     }
 
-    /// <summary>
-    /// Otorga la insignia del pin indicado. Devuelve true si es nueva.
-    /// </summary>
+    /// <summary>Otorga la insignia del pin indicado. Devuelve true si es nueva.</summary>
     public bool OtorgarInsignia(string idPin)
     {
         if (string.IsNullOrEmpty(idPin))
@@ -93,7 +92,7 @@ public class InsigniasManager : MonoBehaviour
         SlotInsignia slot = slots.Find(s => s.idPin == idPin);
         if (slot == null)
         {
-            Debug.LogWarning($"[InsigniasManager] No hay slot para el idPin '{idPin}'.");
+            Debug.LogWarning($"[InsigniasManager] No hay slot para el idPin '{idPin}'. Debe coincidir exactamente con el de la lista.");
             return false;
         }
 
@@ -105,17 +104,17 @@ public class InsigniasManager : MonoBehaviour
 
         slot.desbloqueada = true;
 
-        // Cambiar imagen bloqueada por activa
         if (slot.imagenBloqueada != null)
             slot.imagenBloqueada.gameObject.SetActive(false);
 
         if (slot.imagenActiva != null)
             slot.imagenActiva.gameObject.SetActive(true);
 
-        Debug.Log($"[InsigniasManager] 🏅 Insignia otorgada: {idPin} ({PinesCompletados}/{totalPinesEnEscena})");
+        Debug.Log($"[InsigniasManager] 🏅 Insignia otorgada: {idPin} ({PinesCompletados}/{TotalPines})");
 
-        if (TodasCompletadas)
+        if (TodasCompletadas && !eventoDisparado)
         {
+            eventoDisparado = true;
             Debug.Log("[InsigniasManager] 🎉 ¡Todas las insignias obtenidas!");
             OnTodasLasInsigniasObtenidas?.Invoke();
         }
