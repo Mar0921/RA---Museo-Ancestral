@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FloorD_Desgaste_Prueba
+  m_Name: FloorD_Desgaste9
   m_Shader: {fileID: -6465566751694194690, guid: 4ef9916ba7294578b715b8d8118937c3, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -26,7 +26,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 553f1d554e5f97b45ab746cbc464c62b, type: 3}
+        m_Texture: {fileID: 2800000, guid: b862a93791fae974bafda9feb8a3901b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
