@@ -6,10 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 
 /// <summary>
-/// Visor de objeto en detalle con render aislado (cámara propia -> RenderTexture -> RawImage).
-/// Funciona con cualquier modo de Canvas (Overlay, Camera, World) porque el objeto 3D
-/// se dibuja DENTRO del panel, entre el fondo y los textos/botones.
-/// Debe estar en un GameObject SIEMPRE ACTIVO (no en el panel que se oculta).
+/// Visor de objeto en detalle con render aislado.
 /// </summary>
 public class VisorObjetoDetalle : MonoBehaviour
 {
@@ -17,29 +14,24 @@ public class VisorObjetoDetalle : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private GameObject panelVisor;
-    [Tooltip("Opcional. Si se deja vacío, se crea automáticamente como primer hijo del panel (detrás de textos y botón).")]
+    [Tooltip("Opcional. Si se deja vacío, se crea automáticamente.")]
     [SerializeField] private RawImage imagenVisor;
     [SerializeField] private Button botonCerrar;
     [SerializeField] private TextMeshProUGUI textoTitulo;
     [SerializeField] private TextMeshProUGUI textoDescripcion;
 
     [Header("Render aislado")]
-    [Tooltip("Cámara AR (si se deja vacío usa Camera.main). Se le oculta la capa del visor mientras está abierto.")]
     [SerializeField] private Camera camaraAR;
-    [Tooltip("Capa SIN USAR en el proyecto, solo para el objeto del visor")]
     [SerializeField] private int capaVisor = 31;
     [SerializeField] private Vector3 posicionRig = new Vector3(0f, 5000f, 0f);
     [SerializeField] private float campoVision = 30f;
-    [Tooltip("Tamaño interno (unidades) de la dimensión más grande del objeto")]
     [SerializeField] private float tamanoObjetivo = 1f;
-    [Tooltip("Qué fracción de la pantalla ocupa el objeto al abrir")]
     [SerializeField, Range(0.3f, 0.9f)] private float ocupacionPantalla = 0.55f;
-    [Tooltip("1 = resolución nativa del panel. Baja a 0.75 si el celular va lento")]
     [SerializeField, Range(0.4f, 1f)] private float escalaResolucion = 1f;
     [SerializeField] private bool crearLuzPropia = true;
 
     [Header("Interacción")]
-    [SerializeField] private float velocidadRotacion = 0.3f;     // grados por píxel
+    [SerializeField] private float velocidadRotacion = 0.3f;
     [SerializeField] private float velocidadZoomTactil = 0.002f;
     [SerializeField] private float velocidadZoomMouse = 0.1f;
     [SerializeField] private float zoomMin = 0.5f;
@@ -71,7 +63,12 @@ public class VisorObjetoDetalle : MonoBehaviour
         if (Instance == null) Instance = this;
         else { Destroy(gameObject); return; }
 
-        if (panelVisor != null) panelVisor.SetActive(false);
+        if (panelVisor != null)
+        {
+            ForzarPantallaCompleta(panelVisor);
+            panelVisor.SetActive(false);
+        }
+
         if (botonCerrar != null) botonCerrar.onClick.AddListener(CerrarVisor);
     }
 
@@ -86,10 +83,6 @@ public class VisorObjetoDetalle : MonoBehaviour
     // API
     // ============================================================
 
-    /// <summary>
-    /// Muestra el objeto y espera (como corrutina) hasta que el usuario lo cierre.
-    /// Uso: yield return VisorObjetoDetalle.Instance.MostrarYEsperar(...);
-    /// </summary>
     public IEnumerator MostrarYEsperar(GameObject prefab, string titulo, string descripcion)
     {
         if (prefab == null || activo) yield break;
@@ -109,22 +102,20 @@ public class VisorObjetoDetalle : MonoBehaviour
         if (textoTitulo != null) textoTitulo.text = titulo ?? "";
         if (textoDescripcion != null) textoDescripcion.text = descripcion ?? "";
 
-        // Panel visible primero: hay que medirlo para dimensionar el RenderTexture
         panelVisor.SetActive(true);
+        ForzarPantallaCompleta(panelVisor); // Asegura que el panel ocupe toda la pantalla
         AsegurarImagenVisor();
         Canvas.ForceUpdateCanvases();
 
         CrearRenderTexture();
         CrearRig();
 
-        // Instancia del objeto dentro del rig aislado
         GameObject instancia = Instantiate(prefab, pivot);
         instancia.transform.localPosition = Vector3.zero;
         instancia.transform.localRotation = Quaternion.identity;
         AsignarCapaRecursiva(instancia, capaVisor);
         instancia.SetActive(true);
 
-        // Centrar en el pivot y normalizar tamaño
         Renderer[] renderers = instancia.GetComponentsInChildren<Renderer>();
         float maxDim = 1f;
         if (renderers.Length > 0)
@@ -139,17 +130,25 @@ public class VisorObjetoDetalle : MonoBehaviour
         escalaBase = tamanoObjetivo / maxDim;
         zoomActual = 1f;
 
-        // Distancia de cámara para que el objeto quepa (limita el lado más estrecho de la pantalla)
+        // -------------------------------------------------------------------------
+        // CÁLCULO DE CÁMARA CORREGIDO: Asegura que el objeto quepa en cualquier pantalla
+        // -------------------------------------------------------------------------
         float aspecto = (float)rt.width / rt.height;
         float tanMitad = Mathf.Tan(campoVision * 0.5f * Mathf.Deg2Rad);
         float ladoVisible = tamanoObjetivo / ocupacionPantalla;
-        float distancia = ladoVisible / (2f * tanMitad * Mathf.Min(1f, aspecto));
+
+        // Calcula la distancia necesaria para el encuadre vertical y horizontal
+        float distVert = ladoVisible / (2f * tanMitad);
+        float distHoriz = ladoVisible / (2f * tanMitad * aspecto);
+
+        // Toma la mayor distancia para garantizar que el objeto NUNCA se corte
+        float distancia = Mathf.Max(distVert, distHoriz);
+
         visorCam.transform.localPosition = new Vector3(0f, 0f, -distancia);
         visorCam.transform.localRotation = Quaternion.identity;
 
         pivot.localScale = Vector3.zero;
 
-        // Ocultar la capa del visor a la cámara AR (por seguridad, además de la distancia)
         if (camaraAR != null)
         {
             maskOriginalAR = camaraAR.cullingMask;
@@ -158,13 +157,12 @@ public class VisorObjetoDetalle : MonoBehaviour
         }
 
         visorCam.enabled = true;
-        yield return null; // dejar que la cámara renderice un frame antes de mostrar la textura
+        yield return null;
         if (imagenVisor != null) imagenVisor.enabled = true;
 
         yield return AnimarEscala(0f, escalaBase);
         interactivo = true;
 
-        // Esperar a que el usuario lo cierre
         while (activo) yield return null;
     }
 
@@ -174,7 +172,6 @@ public class VisorObjetoDetalle : MonoBehaviour
         StartCoroutine(SecuenciaCierre());
     }
 
-    /// <summary>Cierre inmediato (por si el quiz se cierra desde fuera).</summary>
     public void ForzarCierre()
     {
         if (!activo) return;
@@ -194,8 +191,24 @@ public class VisorObjetoDetalle : MonoBehaviour
     }
 
     // ============================================================
-    // RENDER AISLADO
+    // RENDER AISLADO Y PANTALLA COMPLETA
     // ============================================================
+
+    private void ForzarPantallaCompleta(GameObject panel)
+    {
+        RectTransform rt = panel.GetComponent<RectTransform>();
+        if (rt != null)
+        {
+            // Forza las anclas a estirarse por completo
+            rt.anchorMin = Vector2.zero;
+            rt.anchorMax = Vector2.one;
+            rt.offsetMin = Vector2.zero;
+            rt.offsetMax = Vector2.zero;
+
+            // Lo pone por encima de todos los demás elementos UI
+            panel.transform.SetAsLastSibling();
+        }
+    }
 
     private void AsegurarImagenVisor()
     {
@@ -203,7 +216,7 @@ public class VisorObjetoDetalle : MonoBehaviour
         {
             GameObject go = new GameObject("ImagenVisor3D", typeof(RectTransform), typeof(RawImage));
             go.transform.SetParent(panelVisor.transform, false);
-            go.transform.SetAsFirstSibling(); // detrás de textos y botón Cerrar
+            go.transform.SetAsFirstSibling();
 
             RectTransform r = go.GetComponent<RectTransform>();
             r.anchorMin = Vector2.zero;
@@ -216,7 +229,7 @@ public class VisorObjetoDetalle : MonoBehaviour
 
         imagenVisor.color = Color.white;
         imagenVisor.raycastTarget = true;
-        imagenVisor.enabled = false; // se habilita cuando ya hay un frame renderizado
+        imagenVisor.enabled = false;
     }
 
     private void CrearRenderTexture()
@@ -224,18 +237,9 @@ public class VisorObjetoDetalle : MonoBehaviour
         int w = Screen.width;
         int h = Screen.height;
 
-        Rect r = imagenVisor.canvas != null
-            ? RectTransformUtility.PixelAdjustRect(imagenVisor.rectTransform, imagenVisor.canvas)
-            : new Rect(0, 0, Screen.width, Screen.height);
-
-        if (r.width > 8f && r.height > 8f)
-        {
-            w = Mathf.RoundToInt(r.width);
-            h = Mathf.RoundToInt(r.height);
-        }
-
-        w = Mathf.Clamp(Mathf.RoundToInt(w * escalaResolucion), 256, 2048);
-        h = Mathf.Clamp(Mathf.RoundToInt(h * escalaResolucion), 256, 2048);
+        // Usa exactamente el tamaño de la pantalla para evitar recortes por aspect ratio
+        w = Mathf.Clamp(Mathf.RoundToInt(w * escalaResolucion), 256, 4096);
+        h = Mathf.Clamp(Mathf.RoundToInt(h * escalaResolucion), 256, 4096);
 
         rt = new RenderTexture(w, h, 24, RenderTextureFormat.ARGB32)
         {
@@ -258,7 +262,7 @@ public class VisorObjetoDetalle : MonoBehaviour
         camGO.transform.SetParent(rig.transform, false);
         visorCam = camGO.AddComponent<Camera>();
         visorCam.clearFlags = CameraClearFlags.SolidColor;
-        visorCam.backgroundColor = new Color(0f, 0f, 0f, 0f);   // fondo transparente
+        visorCam.backgroundColor = new Color(0f, 0f, 0f, 0f);
         visorCam.cullingMask = 1 << capaVisor;
         visorCam.fieldOfView = campoVision;
         visorCam.nearClipPlane = 0.1f;
@@ -407,10 +411,6 @@ public class VisorObjetoDetalle : MonoBehaviour
         pivot.localScale = Vector3.one * (escalaBase * zoomActual);
     }
 
-    /// <summary>
-    /// True solo si el toque cae sobre un elemento interactivo (botón, slider...).
-    /// El fondo del panel y la imagen del visor NO bloquean la rotación.
-    /// </summary>
     private bool PunteroSobreBoton(Vector2 posicionPantalla)
     {
         if (EventSystem.current == null) return false;
