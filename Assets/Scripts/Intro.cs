@@ -19,6 +19,22 @@ public class Intro : MonoBehaviour
     [Header("Escena")]
     [SerializeField] private string nombreEscenaPrincipal = "Principal";
 
+    [Header("Audio")]
+    [Tooltip("Música de fondo (se repite en bucle).")]
+    [SerializeField] private AudioClip musicaFondo;
+    [Tooltip("Sonido que suena al presionar cualquier botón.")]
+    [SerializeField] private AudioClip sonidoBoton;
+    [Range(0f, 1f)]
+    [SerializeField] private float volumenMusica = 0.5f;
+    [Range(0f, 1f)]
+    [SerializeField] private float volumenBoton = 1f;
+    [Tooltip("Segundos que tarda la música en subir al volumen configurado.")]
+    [SerializeField] private float duracionFundidoEntradaMusica = 2f;
+    [Tooltip("Segundos que baja la música antes de cargar la escena principal.")]
+    [SerializeField] private float duracionFundidoSalidaMusica = 0.4f;
+    [Tooltip("Espera antes de cambiar de escena para que se escuche el clic.")]
+    [SerializeField] private float retardoSalida = 0.35f;
+
     [Header("Objetos del Canvas - Intro")]
     [SerializeField] private GameObject oscuro;
     [SerializeField] private GameObject logo;
@@ -153,15 +169,78 @@ public class Intro : MonoBehaviour
 
     private readonly List<CanvasGroup> itemsEco = new List<CanvasGroup>();
 
+    private AudioSource fuenteMusica;
+    private AudioSource fuenteEfectos;
+
     private int indiceActual = 0;
     private bool transicionando = false;
     private bool sonidoActivo = true;
+    private bool saliendo = false;
 
     private void Start()
     {
+        PrepararAudio();
         PrepararEstadoInicial();
         ConectarBotones();
+        IniciarMusica();
         StartCoroutine(SecuenciaIntro());
+    }
+
+    // ---------- Audio ----------
+    private void PrepararAudio()
+    {
+        fuenteMusica = gameObject.AddComponent<AudioSource>();
+        fuenteMusica.playOnAwake = false;
+        fuenteMusica.loop = true;
+        fuenteMusica.spatialBlend = 0f;
+        fuenteMusica.clip = musicaFondo;
+        fuenteMusica.volume = 0f;
+
+        fuenteEfectos = gameObject.AddComponent<AudioSource>();
+        fuenteEfectos.playOnAwake = false;
+        fuenteEfectos.loop = false;
+        fuenteEfectos.spatialBlend = 0f;
+    }
+
+    private void IniciarMusica()
+    {
+        if (musicaFondo == null || fuenteMusica == null) return;
+
+        fuenteMusica.Play();
+        StartCoroutine(FundidoVolumen(fuenteMusica, 0f, volumenMusica, duracionFundidoEntradaMusica));
+    }
+
+    private void ReproducirClick()
+    {
+        if (sonidoBoton == null || fuenteEfectos == null) return;
+        fuenteEfectos.PlayOneShot(sonidoBoton, volumenBoton);
+    }
+
+    // Agrega el sonido de clic a un botón (si existe)
+    private void AgregarClick(Button boton)
+    {
+        if (boton != null) boton.onClick.AddListener(ReproducirClick);
+    }
+
+    private IEnumerator FundidoVolumen(AudioSource fuente, float desde, float hasta, float duracion)
+    {
+        if (fuente == null) yield break;
+
+        if (duracion <= 0f)
+        {
+            fuente.volume = hasta;
+            yield break;
+        }
+
+        float t = 0f;
+        fuente.volume = desde;
+        while (t < duracion)
+        {
+            t += Time.deltaTime;
+            fuente.volume = Mathf.Lerp(desde, hasta, Mathf.Clamp01(t / duracion));
+            yield return null;
+        }
+        fuente.volume = hasta;
     }
 
     // ---------- Estado inicial ----------
@@ -261,6 +340,19 @@ public class Intro : MonoBehaviour
         if (botonIniciar != null) botonIniciar.onClick.AddListener(OnIniciar);
         if (botonEntendidoEscanear != null) botonEntendidoEscanear.onClick.AddListener(OnEntendidoEscanear);
         if (botonSiguientePresente != null) botonSiguientePresente.onClick.AddListener(Empezar);
+
+        // Sonido de clic en todos los botones
+        AgregarClick(botonSiguiente);
+        AgregarClick(botonSaltar);
+        AgregarClick(botonSonido);
+        AgregarClick(botonSiguienteHistoria);
+        AgregarClick(botonSiguienteEco);
+        AgregarClick(botonSiguienteGuia1);
+        AgregarClick(botonAtras);
+        AgregarClick(botonEntendido);
+        AgregarClick(botonIniciar);
+        AgregarClick(botonEntendidoEscanear);
+        AgregarClick(botonSiguientePresente);
     }
 
     // ---------- Secuencia principal ----------
@@ -590,6 +682,19 @@ public class Intro : MonoBehaviour
     // ---------- Escena / salida ----------
     public void Empezar()
     {
+        if (saliendo) return;
+        saliendo = true;
+        StartCoroutine(EmpezarCoroutine());
+    }
+
+    // Deja que se escuche el clic y baja la música antes de cambiar de escena
+    private IEnumerator EmpezarCoroutine()
+    {
+        if (fuenteMusica != null && fuenteMusica.isPlaying)
+            StartCoroutine(FundidoVolumen(fuenteMusica, fuenteMusica.volume, 0f, duracionFundidoSalidaMusica));
+
+        yield return new WaitForSeconds(retardoSalida);
+
         SceneManager.LoadScene(nombreEscenaPrincipal);
     }
 

@@ -4082,6 +4082,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Intro
   nombreEscenaPrincipal: Principal
+  musicaFondo: {fileID: 8300000, guid: ed903b896e120d44cb72c4f152f29063, type: 3}
+  sonidoBoton: {fileID: 8300000, guid: e86c63bad1d404b4bbea029fa53b643a, type: 3}
+  volumenMusica: 0.161
+  volumenBoton: 0.463
+  duracionFundidoEntradaMusica: 2
+  duracionFundidoSalidaMusica: 0.4
+  retardoSalida: 0.35
   oscuro: {fileID: 366256831}
   logo: {fileID: 2004100603}
   internet: {fileID: 707163058}
